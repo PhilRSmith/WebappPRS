@@ -3,12 +3,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+//var axios = require('axios').default;
+var MongoClient = require('mongodb').MongoClient
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
 
+MongoClient.connect('mongodb+srv://PRSmith:Ocelot2893!@418term-ham3w.mongodb.net/test?retryWrites=true&w=majority', function (err, db) {
+  if (err) throw err
+  })
+  
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
