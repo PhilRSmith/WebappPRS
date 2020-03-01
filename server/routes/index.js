@@ -3,10 +3,15 @@ var express = require('express');
 var router = express();
 var portDev = process.env.port || 9000
 var portPub = process.env.port || 8080
-
+var cors = require('cors');
 /* GET home page. */
 
 router.listen(portDev, () => console.log(`Listening on port ${portDev}`));
+
+router.get('/', (req, res, next) => {
+	res.render( 'index' , {title: 'Express' })
+	});
+
 
 router.get('/express', (req, res) => {
 	res.send({ express: 'express backend linked to react' })
