@@ -1,15 +1,19 @@
 import React from 'react'
 import 'bootstrap/dist/js/bootstrap.bundle';
-import { Router, Route, Link } from 'react-router'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router'
 import NavBar from './NavBar'
-import profile from './profile'
+import Profile from './Profile'
 
 class App extends React.Component {
 	render(){
 	return (
 		<React.Fragment>
+			<div>
 			<NavBar />
-			<profile />
+			</div>
+			<div>
+			<Profile />
+			</div>
 		</React.Fragment>
 	  )
 	}
