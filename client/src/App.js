@@ -13,19 +13,25 @@ class App extends React.Component {
 		}
 	};
 	
+	 getLoginWindowStatus = (loginWindowStatus) => {
+        this.setState({showLogin : !loginWindowStatus});
+    };
+	
 	render(){
-		if(this.state.showLogin) {
-			
-			}
+		
 	return (
 		<React.Fragment>
 			<div>
-			<NavBar />
+			<NavBar 
+				getWindowStatus = {this.getLoginWindowStatus}
+			/>
+			<Login />
 			<Profile />
 			</div>
 		</React.Fragment>
 	  )
 	}
+	
 };
 
 export default App;
