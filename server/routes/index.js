@@ -1,13 +1,16 @@
 var express = require('express');
 //var axios= require('axios').default;
-var router = express.Router();
-var app= express();
+var router = express();
+var portDev = process.env.port || 9000
+var portPub = process.env.port || 8080
 
 /* GET home page. */
-  router.get('/', function(req, res) {
-  res.sendFile(path.join('../client/src/App.js') 'build', );
-});
 
+router.listen(portDev, () => console.log(`Listening on port ${portDev}`));
+
+router.get('/express', (req, res) => {
+	res.send({ express: 'express backend linked to react' })
+	});
 
 //note, unlike POST, parameters are visible to a user in browser address bar in GET request.
 router.get('/add/:firstNumber/and/:secondNumber', (req,res)=>{
@@ -18,5 +21,4 @@ router.get('/add/:firstNumber/and/:secondNumber', (req,res)=>{
   res.json({"Addition" : firstNo + secondNo});
 });
 
-app.listen(process.env.port || 8080);
 module.exports = router;
