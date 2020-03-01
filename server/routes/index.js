@@ -1,10 +1,11 @@
 var express = require('express');
 //var axios= require('axios').default;
 var router = express.Router();
+var app= express();
 
 /* GET home page. */
-  router.get('/', function(req, res, next) {
-  res.render('index', { title: 'PRSapp' });
+  router.get('/', function(req, res) {
+  res.sendFile(path.join('../client/src/App.js') 'build', );
 });
 
 
@@ -17,4 +18,5 @@ router.get('/add/:firstNumber/and/:secondNumber', (req,res)=>{
   res.json({"Addition" : firstNo + secondNo});
 });
 
+app.listen(process.env.port || 8080);
 module.exports = router;
