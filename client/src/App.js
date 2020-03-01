@@ -3,15 +3,24 @@ import 'bootstrap/dist/js/bootstrap.bundle';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router'
 import NavBar from './NavBar'
 import Profile from './Profile'
+import Login from './Login'
 
 class App extends React.Component {
+	constructor(props){
+		super(props);
+		this.state = { 
+			showLogin: false 
+		}
+	};
+	
 	render(){
+		if(this.state.showLogin) {
+			
+			}
 	return (
 		<React.Fragment>
 			<div>
 			<NavBar />
-			</div>
-			<div>
 			<Profile />
 			</div>
 		</React.Fragment>
