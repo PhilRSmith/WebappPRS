@@ -26,7 +26,6 @@ class App extends React.Component {
 	return (
 		<React.Fragment>
 			<div>
-			<p className = "App-intro" > { this.state.servOutput } </p>
 			<NavBar 
 				getWindowStatus = {this.getLoginWindowStatus}
 			/>
