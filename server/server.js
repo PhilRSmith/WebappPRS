@@ -4,15 +4,17 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-//var axios = require('axios').default;
+
 var MongoClient = require('mongodb').MongoClient
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var adminLoginCredentials = 'mongodb+srv://PRSmith:Ocelot2893!@418term-ham3w.mongodb.net/test?retryWrites=true&w=majority'
 var app = express();
 
-MongoClient.connect('mongodb+srv://PRSmith:Ocelot2893!@418term-ham3w.mongodb.net/test?retryWrites=true&w=majority', function (err, db) {
+MongoClient.connect(adminLoginCredentials, function (err, db) {
+  console.log(db);
   if (err) throw err
+  db.close()
   })
   
 // view engine setup

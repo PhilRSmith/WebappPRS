@@ -1,9 +1,10 @@
 var express = require('express');
-//var axios= require('axios').default;
 var router = express();
 var portDev = process.env.port || 9000
 var portPub = process.env.port || 8080
 var cors = require('cors');
+
+router.use(cors());
 /* GET home page. */
 
 router.listen(portDev, () => console.log(`Listening on port ${portDev}`));
@@ -13,8 +14,8 @@ router.get('/', (req, res, next) => {
 	});
 
 
-router.get('/express', (req, res) => {
-	res.send({ express: 'express backend linked to react' })
+router.get('/profile', (req, res) => {
+	res.json({ express: 'express backend linked to react' })
 	});
 
 //note, unlike POST, parameters are visible to a user in browser address bar in GET request.

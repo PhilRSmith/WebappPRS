@@ -7,12 +7,30 @@ class NavBar extends React.Component {
 	 constructor(props) {
 		super(props);
 		this.state = {
-		showLogin: false
+		showLogin: false,
+		servOutput: null
 		}
 		this.clickChangeWindowStatus = this.clickChangeWindowStatus.bind(this);
 	};
 	
 	 
+	 
+	outputHandler = (event) => {
+		let out= event.target.output;
+		let val = event.target.value;
+		this.setState({[out]: val});
+	}
+	
+	 profClickHandler = (event) =>  {
+	 	event.preventDefault();
+	 	var url = 'http://localhost:9000/profile'
+      fetch(url)
+        .then((result) => result.json())
+        .then(result => {
+       		this.setState({ servOutput : result})
+       	});
+       }
+       
 	 getLoginWindowStatus = (loginWindowStatus) => {
         this.setState({showLogin: loginWindowStatus});
     };
@@ -47,7 +65,9 @@ class NavBar extends React.Component {
 	    			<div className="collapse navbar-collapse" id="collapsibleNavbar">
 			  			<ul className="navbar-nav">
 				    		<li className="nav-item active">
-				      		<a className="nav-link" href="#">Profile</a>
+				      		<a className="nav-link" href="#" onClick={this.profClickHandler}>
+				      		
+				      		Profile</a>
 				    		</li>
 				    		<li className="nav-item active">
 				     		 	<a className="nav-link" href="#" data-toggle="modal" data-target="#modalLoginForm"
