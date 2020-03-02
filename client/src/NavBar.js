@@ -48,8 +48,9 @@ class NavBar extends React.Component {
 	  render() {
 	    return (
 			<React.Fragment>
-			<div className="text-center" style={{String: "margin-bottom:0"}}>
-				<img src={require('./p5wallpaper.png')} width="100%"height="200" alt="Logo" />
+			<div className="text-left" style={{String: "margin-bottom:0"}}>
+				<img src={require('./p5wallpaper.png')} width="80%" height="10%" alt />
+				<img src={require('./p5morgana2.png')} width="15%" height="10%" alt />
 			</div>
 	      <div>
 	        	<nav className="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -61,7 +62,7 @@ class NavBar extends React.Component {
 				   	<span className="navbar-toggler-icon"></span> 
 				   </button>
 	    			
-	    			
+	    			{/* Collapsible navbar behavior*/}
 	    			<div className="collapse navbar-collapse" id="collapsibleNavbar">
 			  			<ul className="navbar-nav">
 				    		<li className="nav-item active">
@@ -69,7 +70,7 @@ class NavBar extends React.Component {
 				      		
 				      		Profile</a>
 				    		</li>
-				    		<li className="nav-item active">
+				    		<li className="nav-item active"> {/* Login Link toggles modal "login" component */}
 				     		 	<a className="nav-link" href="#" data-toggle="modal" data-target="#modalLoginForm"
 				     		 	onClick={this.clickChangeWindowStatus}>
 				     		 	{this.state.showLogin ? false:true}

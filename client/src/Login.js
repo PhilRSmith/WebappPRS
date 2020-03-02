@@ -15,7 +15,9 @@ class Login extends React.Component {
   
   render() {
     return (
-    			<React.Fragment>
+		
+				<React.Fragment>
+					{/* Modal popup component for login , component rendering linked to login click*/}
 					<div href="#" className="modal fade" id="modalLoginForm" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel"
 					  aria-hidden="true" >
 						  <div className="modal-dialog" role="document" show ={{String: "true"}}>
