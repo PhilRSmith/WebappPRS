@@ -1,41 +1,23 @@
 import React from 'react'
 import 'bootstrap/dist/js/bootstrap.bundle'
-//import { Router, Switch, Route, Link } from 'react-router-dom'
-import NavBar from './NavBar'
-import Profile from './Profile'
-import Login from './Login'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from 'axios'
+import ProfMain from './Components/Main/ProfMain'
 
 class App extends React.Component {
-	constructor(props){
-		super(props);
-		this.state = { 
-			showLogin: false 
-			
-		}
-	};
 	
-		 
-	
-	 getLoginWindowStatus = (loginWindowStatus) => {
-        this.setState({showLogin : !loginWindowStatus});
-    };
 	
 	render(){
 		
 	return (
-		<React.Fragment>
-			<div>
-			<NavBar 
-				getWindowStatus = {this.getLoginWindowStatus}
-			/>
-			<Login />
-			<Profile />
-			</div>
-		</React.Fragment>
+		<Router>
+			<Switch>
+				<Route path="/" component={ProfMain} />			
+			</Switch>
+		</Router>
 	  )
 	}
 	
-};
+}
 
 export default App;
