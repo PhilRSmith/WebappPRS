@@ -11,11 +11,7 @@ var usersRouter = require('./routes/users');
 var adminLoginCredentials = 'mongodb+srv://PRSmith:Ocelot2893!@418term-ham3w.mongodb.net/test?retryWrites=true&w=majority'
 var app = express();
 
-MongoClient.connect(adminLoginCredentials, function (err, db) {
-  console.log(db);
-  if (err) throw err
-  db.close()
-  })
+
   
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

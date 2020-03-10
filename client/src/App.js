@@ -9,13 +9,14 @@ class App extends React.Component {
 	
 	render(){
 		
-	return (
+	return(
 		<Router>
 			<Switch>
 				<Route path="/" component={ProfMain} />			
 			</Switch>
 		</Router>
-	  )
+		)
+		
 	}
 	
 }
