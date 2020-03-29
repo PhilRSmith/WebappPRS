@@ -5,6 +5,7 @@ import NavBar from '../NavBar/NavBar'
 import Profile from './Profile'
 import Login from '../NavBar/Login'
 import axios from 'axios'
+import {Link} from 'react-router-dom';
 
 class ProfMain extends React.Component {
 	constructor(props){

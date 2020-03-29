@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import {Link} from 'react-router-dom';
 //import Login from './Login.js'
 
 /*basic BootStrap Code provided within W3 Tutorials, edited for my use*/
@@ -46,42 +47,49 @@ class NavBar extends React.Component {
     
     
 	  render() {
+
+		var NavStyle = {
+			display: "flex",
+			width:"100%",
+			height:"15vh",
+			resize: "horizontal",
+			marginBottom: 0
+		  };
+		
 	    return (
+
 			<React.Fragment>
-			<div className="text-left" style={{String: "margin-bottom:0"}}>
-				<img src={require('../images/p5wallpaper.png')} width="80%" height="10%" alt />
-				<img src={require('../images/p5morgana2.png')} width="15%" height="10%" alt />
-			</div>
-	      <div>
-	        	<nav className="navbar navbar-expand-sm bg-dark navbar-dark">
-		        	<a className="navbar-brand" href="#">
-	    				<img src={require('../images/p5logo.png')} width="40" height="40" alt="Logo" />
-	    			</a>
-	    			
-	    			<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-				   	<span className="navbar-toggler-icon"></span> 
-				   </button>
-	    			
-	    			{/* Collapsible navbar behavior*/}
-	    			<div className="collapse navbar-collapse" id="collapsibleNavbar">
-			  			<ul className="navbar-nav">
-				    		<li className="nav-item active">
-				      		<a className="nav-link" href="#" onClick={this.profClickHandler}>
-				      		Profile</a>
-				    		</li>
-				    		<li className="nav-item active"> {/* Login Link toggles modal "login" component */}
-				     		 	<a className="nav-link" href="#" data-toggle="modal" data-target="#modalLoginForm"
-				     		 	onClick={this.clickChangeWindowStatus}>
-				     		 	{this.state.showLogin ? false:true}
-				     		 	Login</a>
-				    		</li>
-			  			</ul>
-			  			</div>
-			  			<div className="container">
-							<div className="column"> <p > <font color="white" style={{String: "Arial"}}>Welcome to my page!</font></p> </div>
-							</div>
-				</nav>
-	      </div>
+				<div className = 'containerLeft' style={NavStyle}>
+					<img src={require('../images/p5wallpaper.png')} width= "80%" alt />
+					<img src={require('../images/p5morgana2.png')} width = "20%" alt />
+				</div>
+				<div>	
+					<nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+						<a className="navbar-brand" href="#">
+							<Link to ='/' > <img src={require('../images/p5logo.png')} width="40" height="40" alt="Logo" /> </Link>
+						</a>
+						<ul className="navbar-nav">
+							<li className="nav-item active">
+								<Link to='/Profile' className="nav-link" href="#">
+								Profile
+								</Link>
+							</li>
+							<li className="nav-item active"> {/* Login Link toggles modal "login" component */}
+								<a className="nav-link" href="#" data-toggle="modal" data-target="#modalLoginForm"
+								onClick={this.clickChangeWindowStatus}>
+								{this.state.showLogin ? false:true}
+								Login</a>
+							</li>
+							<a className="nav-item active">
+								<Link to='/About' className="nav-link" href="#">
+								About Us
+								</Link>
+							</a>
+						</ul>
+						
+					</nav>
+				</div>
+			
 	      </React.Fragment>
     	)
   	}
