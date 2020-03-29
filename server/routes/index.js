@@ -9,7 +9,6 @@ var cors = require('cors');
 router.use(cors());
 /* GET home page. */
 
-router.listen(portDev, () => console.log(`Listening on port ${portDev}`));
 
 router.get('/', (req, res, next) => {
 	res.render( 'index' , {title: 'Express' })
