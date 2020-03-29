@@ -1,9 +1,9 @@
 import React from 'react'
 import 'bootstrap/dist/js/bootstrap.bundle'
 //import { Router, Switch, Route, Link } from 'react-router-dom'
-import NavBar from './NavBar'
+import NavBar from '../NavBar/NavBar'
 import Profile from './Profile'
-import Login from './Login'
+import Login from '../NavBar/Login'
 import axios from 'axios'
 
 class ProfMain extends React.Component {
