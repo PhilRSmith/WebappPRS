@@ -50,13 +50,13 @@ class NavBar extends React.Component {
 
 			<React.Fragment>
 				<div className = 'containerLeft' style={NavStyle}>
-					<img src={require('../images/p5wallpaper.png')} width= "80%" alt />
-					<img src={require('../images/p5morgana2.png')} width = "20%" alt />
+					<img src={require('../images/p5wallpaper.png')} width= "80%"  />
+					<img src={require('../images/p5morgana2.png')} width = "20%"  />
 				</div>
 				<div>	
 					<nav className="navbar navbar-expand-sm bg-dark navbar-dark">
 						<a className="navbar-brand" href="#">
-							<Link to ='/' > <img src={require('../images/p5logo.png')} width="40" height="40" alt="Logo" /> </Link>
+							<Link to ='/' > <img src={require('../images/p5logo.png')} width="40" height="40"  /> </Link>
 						</a>
 						<ul className="navbar-nav">
 							<li className="nav-item active">
