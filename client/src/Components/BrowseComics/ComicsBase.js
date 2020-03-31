@@ -4,17 +4,16 @@ import 'bootstrap/dist/js/bootstrap.bundle'
 import NavBar from '../NavBar/NavBar'
 import Login from '../NavBar/Login'
 import axios from 'axios'
-import DynamicCards from './DynamicCards'
+import ComicsListCards from './ComicsListCards'
+import ComicsListDropdown from './ComicsListDropdown'
 
-class ProfMain extends React.Component {
+class ComicsBase extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = { 
 			showLogin: false ,
-			cardData: [
-            {Comic_id: '1' ,Title: 'Beginning' , Url: 'https://webcomicpages.s3.us-east-2.amazonaws.com/test.png'},
-            {Comic_id: '2' ,Title: 'Beginning' , Url: 'https://webcomicpages.s3.us-east-2.amazonaws.com/test2.png'},
-			]
+			tempData:[],
+			cardData: [ ]   
 		}
 	};
 	
@@ -22,7 +21,20 @@ class ProfMain extends React.Component {
 	
 	 getLoginWindowStatus = (loginWindowStatus) => {
         this.setState({showLogin : !loginWindowStatus});
-    };
+	};
+	
+	browseLoadHandler = () =>  {
+		var url = 'http://localhost:9000/browse'
+	 fetch(url)
+	 	.then((result) => result.json())
+	 	.then(result => {
+			this.setState({ cardData : result})
+		});
+	  }
+	 
+	  componentDidMount(){
+		this.browseLoadHandler()
+	  }
 	
 	render(){
 		var NavStyle = {
@@ -37,9 +49,9 @@ class ProfMain extends React.Component {
 					/>
 					<Login />
 				</div>
-				<div className = 'container'>
-					<DynamicCards passDataToDynamicCards = {this.state.cardData}/>
-				</div>
+
+				<div className = 'container'><ComicsListDropdown passDataToDynamicCards = {this.state.cardData}/></div>
+				<div className = 'container'><ComicsListCards passDataToDynamicCards = {this.state.cardData}/></div>
 			</div>
             
 		</React.Fragment>
@@ -48,4 +60,4 @@ class ProfMain extends React.Component {
 	
 };
 
-export default ProfMain;
+export default ComicsBase;

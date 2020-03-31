@@ -10,7 +10,7 @@ import {
 	} from '@material-ui/core/'
 import {Link} from 'react-router-dom';	
 	
-	class DynamicCards extends React.Component{ 
+	class ComicsListCards extends React.Component{ 
 		constructor(props) {
 			super(props);
 			this.state = {
@@ -22,7 +22,6 @@ import {Link} from 'react-router-dom';
 						padding: 5,
                         width: "100%",
                         height: "100%",
-						zindex: '10'
 					
 				}
 		   }
@@ -42,15 +41,15 @@ import {Link} from 'react-router-dom';
 							alignItems="flex-start"	
 						>
 							{this.props.passDataToDynamicCards.map(elem => (
-								<Grid item xs={12} sm={12} md={12} key={this.props.passDataToDynamicCards.indexOf(elem)}>
+								<Grid item xs={12} sm={6} md={3} key={this.props.passDataToDynamicCards.indexOf(elem)}>
 									<Card>
 										<CardHeader
-											title = {<Link to={`/${elem.Title}/${elem.Comic_id}`}> {`${elem.Title}`} </Link>}
+											title = {<Link to={`/Read/${elem.issue}/${elem.page}`}> {`${elem.title}`} </Link>}
 										/>
 										<CardContent>
 											<Typography  component={'span'}>
                                                 <div className="container" style={this.state.imagedesc}>
-												<img src= {elem.Url} width = "100%"   />
+												<img src= {elem.img_url} width = "160px" height = "240px"  />
 												</div>
 											</Typography>
 										</CardContent>
@@ -66,4 +65,4 @@ import {Link} from 'react-router-dom';
 		}
 	}
 
-export default DynamicCards
+export default ComicsListCards

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from 'axios'
 import ProfMain from './Components/Profile/ProfMain'
 import Home from './Components/Home/Home'
+import ComicsBase from './Components/BrowseComics/ComicsBase'
 
 class App extends React.Component {
 	
@@ -22,7 +23,8 @@ class App extends React.Component {
 				}
 				>
 					<Route path="/" exact component={Home} />	
-					<Route path="/Profile" component={ProfMain} />			
+					<Route path="/Profile" component={ProfMain} />
+					<Route path="/BrowseComics" component={ComicsBase} />				
 					</div>
 			</Switch>
 		</Router>

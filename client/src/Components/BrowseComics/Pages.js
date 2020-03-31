@@ -10,7 +10,7 @@ import {
 	} from '@material-ui/core/'
 import {Link} from 'react-router-dom';	
 	
-	class DynamicCards extends React.Component{ 
+	class Pages extends React.Component{ 
 		constructor(props) {
 			super(props);
 			this.state = {
@@ -45,12 +45,12 @@ import {Link} from 'react-router-dom';
 								<Grid item xs={12} sm={12} md={12} key={this.props.passDataToDynamicCards.indexOf(elem)}>
 									<Card>
 										<CardHeader
-											title = {<Link to={`/${elem.Title}/${elem.Comic_id}`}> {`${elem.Title}`} </Link>}
+											title = {<Link to={`/Read/${elem.issue}/${elem.page}`}> {`${elem.title}`} </Link>}
 										/>
 										<CardContent>
 											<Typography  component={'span'}>
                                                 <div className="container" style={this.state.imagedesc}>
-												<img src= {elem.Url} width = "100%"   />
+												<img src= {elem.img_url} width = "100%"   />
 												</div>
 											</Typography>
 										</CardContent>
@@ -66,4 +66,4 @@ import {Link} from 'react-router-dom';
 		}
 	}
 
-export default DynamicCards
+export default Pages

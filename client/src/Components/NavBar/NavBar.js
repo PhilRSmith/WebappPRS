@@ -9,7 +9,6 @@ class NavBar extends React.Component {
 		super(props);
 		this.state = {
 		showLogin: false,
-		servOutput: null
 		}
 		this.clickChangeWindowStatus = this.clickChangeWindowStatus.bind(this);
 	};
@@ -22,15 +21,6 @@ class NavBar extends React.Component {
 		this.setState({[out]: val});
 	}
 	
-	 profClickHandler = (event) =>  {
-	 	event.preventDefault();
-	 	var url = 'http://localhost:9000/profile'
-      fetch(url)
-        .then((result) => result.json())
-        .then(result => {
-       		this.setState({ servOutput : result})
-       	});
-       }
        
 	 getLoginWindowStatus = (loginWindowStatus) => {
         this.setState({showLogin: loginWindowStatus});
@@ -70,7 +60,7 @@ class NavBar extends React.Component {
 						</a>
 						<ul className="navbar-nav">
 							<li className="nav-item active">
-								<Link to='/Profile' className="nav-link" href="#">
+								<Link to='/Profile' className="nav-link" href="#" >
 								Profile
 								</Link>
 							</li>
@@ -83,6 +73,11 @@ class NavBar extends React.Component {
 							<a className="nav-item active">
 								<Link to='/About' className="nav-link" href="#">
 								About Us
+								</Link>
+							</a>
+							<a className="nav-item active">
+								<Link to='/BrowseComics' className="nav-link" href="#">
+								Browse!
 								</Link>
 							</a>
 						</ul>

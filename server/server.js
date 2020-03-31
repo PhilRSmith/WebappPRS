@@ -7,10 +7,8 @@ var logger = require('morgan');
 var MongoClient = require('mongodb').MongoClient
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var awsCtrl = require("./awsCtrl");
+var awsCtrl = require("./routes/awsCtrl");
 var cors = require('cors');
-
-var adminLoginCredentials = 'mongodb+srv://PRSmith:Ocelot2893!@418term-ham3w.mongodb.net/test?retryWrites=true&w=majority'
 var app = express();
 
 var portDev = process.env.port || 9000

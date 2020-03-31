@@ -26,12 +26,14 @@ class ProfMain extends React.Component {
 		
 	return (
 		<React.Fragment>
-			<div>
-			<NavBar 
-				getWindowStatus = {this.getLoginWindowStatus}
-			/>
-			<Login />
-			<Profile />
+			<div className='container'>
+				<div className = 'container'>
+					<NavBar 
+						getWindowStatus = {this.getLoginWindowStatus}
+					/>
+				</div>
+					<Login />
+					<Profile />
 			</div>
 		</React.Fragment>
 	  )

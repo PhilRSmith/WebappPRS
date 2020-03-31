@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express();
-var adminLoginCredentials = 'mongodb+srv://PRSmith:Ocelot2893!@418term-ham3w.mongodb.net/test?retryWrites=true&w=majority'
 var MongoClient = require('mongodb').MongoClient
 var portDev = process.env.port || 9000
 var portPub = process.env.port || 8080
 var cors = require('cors');
+
 
 router.use(cors());
 /* GET home page. */
@@ -16,9 +16,10 @@ router.get('/', (req, res, next) => {
   
   /* Example code */
 router.get('/login', (req, res, next) => {
+  const adminLoginCredentials=process.env.DBAccess
   MongoClient.connect(adminLoginCredentials, function (err, client) {
     if (err) throw err
-    let drinks = [ 'water'];
+    let drinks = [ 'water', 'beer'];
     var db =client.db('drinks')
     drinks.forEach((item) => {
       console.log(item);
@@ -34,11 +35,30 @@ router.get('/login', (req, res, next) => {
 })
 
 router.get('/profile', (req, res) => {
+  const adminLoginCredentials=process.env.DBAccess
   MongoClient.connect(adminLoginCredentials, function (err, client) {
     if (err) throw err
-    console.log(client)
+    
   })
 	res.json({ express: 'express backend linked to react' })
+  });
+
+
+router.get('/browse', (req, res) => {
+  const adminLoginCredentials=process.env.DBAccess
+  var comicArray = []
+  MongoClient.connect(adminLoginCredentials, function (err, client) {
+    if (err) throw err
+    
+    var db = client.db('418Admin')
+    var dbPages = db.collection('comicpages')
+
+    dbPages.find({page: '1'}).toArray((err, items)=>{
+     if (err) throw err
+      res.json(items)
+    })
+    
+  })
   });
 
 
@@ -52,3 +72,29 @@ router.get('/add/:firstNumber/and/:secondNumber', (req,res)=>{
 });
 
 module.exports = router;
+
+/** 
+router.get('/browse', (req, res) => {
+  
+  var comicArray = []
+ 
+   comicArray = browseHelper()
+    
+  console.log(comicArray)
+  res.json(comicArray)
+  });
+
+  async function browseHelper(){
+    try{
+    const adminLoginCredentials=process.env.DBAccess
+    client = await MongoClient.connect(adminLoginCredentials, {useNewUrlParser : true} ) 
+      var db = client.db('418Admin');
+      var dbPages = db.collection('comicpages');
+      let response = await dbPages.find({});
+      return response.toArray(); 
+    }
+    catch(err) {console.error(err); }
+    finally{client.close();}
+  }
+  */
+
