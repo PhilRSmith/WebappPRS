@@ -1,12 +1,10 @@
 import React from 'react'
 import 'bootstrap/dist/js/bootstrap.bundle'
 //import { Router, Switch, Route, Link } from 'react-router-dom'
-import NavBar from '../NavBar/NavBar'
-import Login from '../NavBar/Login'
 import axios from 'axios'
 import DynamicCards from './DynamicCards'
 
-class ProfMain extends React.Component {
+class Home extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = { 
@@ -25,18 +23,10 @@ class ProfMain extends React.Component {
     };
 	
 	render(){
-		var NavStyle = {
-			
-		  };
+		
 	return (
 		<React.Fragment>
 			<div className = 'container-flex' >
-				<div className= 'container' style = {NavStyle}>
-					<NavBar 
-						getWindowStatus = {this.getLoginWindowStatus} 
-					/>
-					<Login />
-				</div>
 				<div className = 'container'>
 					<DynamicCards passDataToDynamicCards = {this.state.cardData}/>
 				</div>
@@ -48,4 +38,4 @@ class ProfMain extends React.Component {
 	
 };
 
-export default ProfMain;
+export default Home;
