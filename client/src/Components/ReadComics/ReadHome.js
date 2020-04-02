@@ -1,12 +1,10 @@
 import React from 'react'
 import 'bootstrap/dist/js/bootstrap.bundle'
-//import { Router, Switch, Route, Link } from 'react-router-dom'
-import NavBar from '../NavBar/NavBar'
-import Login from '../NavBar/Login'
 import axios from 'axios'
 import Pages from './Pages'
-import ComicsListDropdown from './ComicsListDropdown'
 import {Link} from 'react-router-dom';	
+
+var urlBase ='http://localhost:9000'
 
 class ReadHome extends React.Component {
 	constructor(props){
@@ -28,7 +26,7 @@ class ReadHome extends React.Component {
     pageLoadHandler = () =>  {
         var curPath = window.location.pathname
         this.setState({pathName: curPath})
-        var url = `http://localhost:9000${curPath}`
+        var url = `${this.props.baseUrl}${curPath}`
 	 fetch(url)
 	 	.then((result) => result.json())
 	 	.then(result => {
@@ -37,7 +35,7 @@ class ReadHome extends React.Component {
 	  }
 
 	browseLoadHandler = () =>  {
-		var url = 'http://localhost:9000/browse'
+		var url = `${this.props.baseUrl}/browse`
 	 fetch(url)
 	 	.then((result) => result.json())
 	 	.then(result => {
@@ -57,9 +55,7 @@ class ReadHome extends React.Component {
 	  }
 	
 	render(){
-		var NavStyle = {
-			
-		  };
+
 		var pageStyle = {
 			
         }
@@ -75,12 +71,6 @@ class ReadHome extends React.Component {
 	return (
 		<React.Fragment>
 			<div className = 'container-flex' >
-				<div className= 'container' style = {NavStyle}>
-					<NavBar 
-						getWindowStatus = {this.getLoginWindowStatus} 
-					/>
-					<Login />
-				</div>
 
                 <div className = 'container' style={pageStyle}>
                 	<div className="dropdown" id = "DropdownList">
@@ -89,7 +79,7 @@ class ReadHome extends React.Component {
 						</button>
                 		<ul className="dropdown-menu" style = {DropdownListStyle}>
 							{this.state.cardData.map(elem => (
-								<li  onClick={() => this.clickReload()}>
+								<li  onClick={() => this.clickReload()} key = {elem.issue}>
 									<div className= 'text-left'>
 										<Link to={`/Read/${elem.issue}`}> {` - Issue: ${elem.issue} : ${elem.title}`} </Link>
 									</div>

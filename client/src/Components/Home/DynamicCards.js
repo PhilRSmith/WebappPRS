@@ -38,19 +38,19 @@ import {Link} from 'react-router-dom';
 							container
 							spacing={1}
 							direction="row"
-							justifyContent="flex-start"
+							justifycontent="flex-start"
 							alignItems="flex-start"	
 						>
 							{this.props.passDataToDynamicCards.map(elem => (
 								<Grid item xs={12} sm={12} md={12} key={this.props.passDataToDynamicCards.indexOf(elem)}>
 									<Card>
 										<CardHeader
-											title = {<Link to={`/${elem.Title}/${elem.Comic_id}`}> {`${elem.Title}`} </Link>}
+											title = {<Link to={`/Read/${elem.issue}`}> {`${elem.title}`} </Link>}
 										/>
 										<CardContent>
 											<Typography  component={'span'}>
-                                                <div className="container" style={this.state.imagedesc}>
-												<img src= {elem.Url} width = "100%"   />
+												<div className="container" style={this.state.imagedesc}>
+												<img src= {elem.img_url} width = "100%" />
 												</div>
 											</Typography>
 										</CardContent>

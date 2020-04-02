@@ -28,9 +28,9 @@ class ComicsListDropdown extends React.Component{
                 <span className="caret"></span></button>
                 <ul className="dropdown-menu" style = {DropdownListStyle}>
                 {this.props.passDataToDynamicCards.map(elem => (
-                    <li>
+                    <li key = {elem.issue}>
                     <div className= 'text-left'>
-                    <Link to={`/Read/${elem.issue}`}> {` - Issue: ${elem.issue} : ${elem.title}`} </Link>
+                    <Link to={`/Read/${elem.issue}`} > {` - Issue: ${elem.issue} : ${elem.title}`} </Link>
                     </div>
                     </li>              
                  ) ) } 	
