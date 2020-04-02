@@ -6,22 +6,34 @@ class Login extends React.Component {
   constructor(props) {
 		super(props);
 		this.state = {
-			username: "",
-			password: ""
+			postedUsername: "",
+			postedPassword: ""
 		}
 	};
 	
-	
+	handleInputChange = (e) => {
+        this.setState({
+            fields: {
+                ...this.state.fields,
+                [e.target.name]: e.target.value
+            }
+        })
+    };
+
+    handleLogIn = (e) => {
+		
+    };
   
   render() {
     return (
 		
 				<React.Fragment>
 					{/* Modal popup component for login , component rendering linked to login click*/}
+					{/* structured based on: https://www.w3schools.com/bootstrap4/bootstrap_modal.asp */}
 					<div href="#" className="modal fade" id="modalLoginForm" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel"
 					  aria-hidden="true" >
 						  <div className="modal-dialog" role="document" show ={{String: "true"}}>
-						    <div className="modal-content">
+						    <div className="modal-content" onChange={this.handleInputChange} onSubmit={this.handleLogIn}>
 						      <div className="modal-header text-center">
 						        <h4 className="modal-title w-100 font-weight-bold">Sign in</h4>
 						        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
