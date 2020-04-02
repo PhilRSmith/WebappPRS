@@ -41,7 +41,7 @@ import {Link} from 'react-router-dom';
 							alignItems="flex-start"	
 						>
 							{this.props.passDataToDynamicCards.map(elem => (
-								<Grid item xs={12} sm={6} md={3} key={this.props.passDataToDynamicCards.indexOf(elem)}>
+								<Grid item xs={9} sm={6} md={3} key={this.props.passDataToDynamicCards.indexOf(elem)}>
 									<Card>
 										<CardHeader
 											title = {<Link to={`/Read/${elem.issue}`}> {`${elem.title}`} </Link>}

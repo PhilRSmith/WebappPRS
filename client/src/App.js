@@ -1,7 +1,6 @@
 import React from 'react'
 import 'bootstrap/dist/js/bootstrap.bundle'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import axios from 'axios'
 import NavBar from './Components/NavBar/NavBar'
 import Login from './Components/NavBar/Login'
 import ProfMain from './Components/Profile/ProfMain'

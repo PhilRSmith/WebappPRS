@@ -39,6 +39,9 @@ class NavBar extends React.Component {
 	  render() {
 
 		var NavStyle = {
+			overflow: 'hidden',
+			
+			top: '0',
 			display: "flex",
 			width:"100%",
 			height:"15vh",
@@ -49,7 +52,7 @@ class NavBar extends React.Component {
 	    return (
 
 			<React.Fragment>
-				<div className = 'containerLeft' style={NavStyle}>
+				<div className = 'container-left' style={NavStyle}>
 					<img src={require('../images/p5wallpaper.png')} width= "80%"  />
 					<img src={require('../images/p5morgana2.png')} width = "20%"  />
 				</div>
