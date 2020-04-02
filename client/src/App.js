@@ -42,13 +42,16 @@ class App extends React.Component {
 				<div className= 'container' style = {NavStyle}>
 						<NavBar 
 							getWindowStatus = {this.getLoginWindowStatus} 
+							loginStatus= {this.state.loginStatus}  
+							baseUrl = {this.state.homeUrl}
 						/>
-						<Login />
+						<Login 
+							getWindowStatus = {this.getLoginWindowStatus} 
+							loginStatus= {this.state.loginStatus}  
+							baseUrl = {this.state.homeUrl}
+						/>
 				</div>
 				<Switch>
-						
-						
-
 					<Route path="/" exact component={
 						() => 
 							<Home 

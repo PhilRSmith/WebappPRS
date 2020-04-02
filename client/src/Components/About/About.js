@@ -1,9 +1,7 @@
 import React from 'react'
 import 'bootstrap/dist/js/bootstrap.bundle'
 //import { Router, Switch, Route, Link } from 'react-router-dom'
-import axios from 'axios'
-import {Link} from 'react-router-dom';	
-
+	
 class About extends React.Component {
 	constructor(props){
 		super(props);

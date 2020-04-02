@@ -7,8 +7,7 @@ import {
 		CardContent,
 		Typography,
 		CardHeader
-	} from '@material-ui/core/'
-import {Link} from 'react-router-dom';	
+	} from '@material-ui/core/'	
 	
 	class Pages extends React.Component{ 
 		constructor(props) {
@@ -50,7 +49,7 @@ import {Link} from 'react-router-dom';
 										<CardContent>
 											<Typography  component={'span'}>
                                                 <div className="container" style={this.state.imagedesc}>
-												<img src= {elem.img_url} width = "100%"   />
+												<img src= {elem.img_url} width = "100%"  alt='empty' />
 												</div>
 											</Typography>
 										</CardContent>

@@ -1,10 +1,8 @@
 import React from 'react'
 import 'bootstrap/dist/js/bootstrap.bundle'
-import axios from 'axios'
 import Pages from './Pages'
 import {Link} from 'react-router-dom';	
 
-var urlBase ='http://localhost:9000'
 
 class ReadHome extends React.Component {
 	constructor(props){

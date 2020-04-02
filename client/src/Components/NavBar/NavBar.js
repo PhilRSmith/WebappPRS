@@ -1,7 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Link} from 'react-router-dom';
-//import Login from './Login.js'
 
 /*basic BootStrap Code provided within W3 Tutorials, edited for my use*/
 class NavBar extends React.Component {
@@ -40,12 +39,10 @@ class NavBar extends React.Component {
 
 		var NavStyle = {
 			overflow: 'hidden',
-			
 			top: '0',
 			display: "flex",
 			width:"100%",
-			height:"15vh",
-			resize: "horizontal",
+			height:"18vh",
 			marginBottom: 0
 		  };
 		
@@ -53,13 +50,13 @@ class NavBar extends React.Component {
 
 			<React.Fragment>
 				<div className = 'container-left' style={NavStyle}>
-					<img src={require('../images/p5wallpaper.png')} width= "80%"  />
-					<img src={require('../images/p5morgana2.png')} width = "20%"  />
+					<img src={require('../images/p5wallpaper.png')} width= "80%" alt= 'empty' />
+					<img src={require('../images/p5morgana2.png')} width = "20%" alt= 'empty' />
 				</div>
 				<div>	
 					<nav className="navbar navbar-expand-sm bg-dark navbar-dark">
 						<div className="navbar-brand" href="#">
-							<Link to ='/' > <img src={require('../images/p5logo.png')} width="40" height="40"  /> </Link>
+							<Link to ='/' > <img src={require('../images/p5logo.png')} width="40" height="40" alt ='empty'  /> </Link>
 						</div>
 						<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
    							<span className="navbar-toggler-icon"></span>

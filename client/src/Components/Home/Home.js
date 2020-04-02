@@ -1,7 +1,6 @@
 import React from 'react'
 import 'bootstrap/dist/js/bootstrap.bundle'
 //import { Router, Switch, Route, Link } from 'react-router-dom'
-import axios from 'axios'
 import DynamicCards from './DynamicCards'
 
 class Home extends React.Component {
