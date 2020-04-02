@@ -1,8 +1,7 @@
-var express = require('express');
 var mongoose = require("mongoose");
 
-var MongooseSetupUsers = async () => {
-    var adminLoginCredentials=process.env.DBAccess
+var MongooseSetup = async () => {
+  var adminLoginCredentials=process.env.DBAccess
   try {
     await mongoose.connect(adminLoginCredentials,  {
       useNewUrlParser: true,
@@ -15,4 +14,4 @@ var MongooseSetupUsers = async () => {
   }
 };
 
-module.exports = MongooseSetupUsers;
+module.exports = MongooseSetup;

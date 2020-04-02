@@ -1,8 +1,7 @@
 var mongoose = require("mongoose");
-var express = require('express');
 
-//code sourced from: https://dev.to/dipakkr/implementing-authentication-in-nodejs-with-express-and-jwt-codelab-1-j5i
-const userLayout = mongoose.Schema({
+//basic format code sourced from: https://dev.to/dipakkr/implementing-authentication-in-nodejs-with-express-and-jwt-codelab-1-j5i
+const userSchema = mongoose.Schema({
   username: {
     type: String,
     required: true
@@ -26,4 +25,4 @@ const userLayout = mongoose.Schema({
 }, { collection: 'users'});
 
 // export model user with UserSchema
-module.exports = mongoose.model("userLayout", userLayout);
+module.exports = mongoose.model("userSchema", userSchema);

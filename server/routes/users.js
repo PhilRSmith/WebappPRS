@@ -5,8 +5,8 @@ var bcrypt = require('bcrypt');
 var jwt = require("jsonwebtoken");
 const { check, validationResult} = require("express-validator");
 var bodyParser = require("body-parser");
-var mongooseSetup = require("../MongooseSetup/MongooseSetupUsers")
-var User = require("../userLayout/userLayout");
+var mongooseSetup = require("../MongooseSetup/MongooseSetup")
+var User = require("../Schemas/userSchema");
 router.use(cors());
 var SecretPayload=process.env.SecretPayload
 

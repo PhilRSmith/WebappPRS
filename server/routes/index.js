@@ -26,10 +26,10 @@ router.get('/profile', (req, res) => {
 router.get('/browse', (req, res) => {
   const adminLoginCredentials=process.env.DBAccess
   MongoClient.connect(adminLoginCredentials, {
-    useNewUrlParser: true,
-    useUnifiedTopology : true 
-    } , function (err, client) {
-    if (err) throw err
+                      useNewUrlParser: true,
+                      useUnifiedTopology : true 
+                      } , function (err, client) {
+                      if (err) throw err
     
     var db = client.db('418Admin')
     var dbPages = db.collection('comicpages')
@@ -49,10 +49,10 @@ router.get('/Read/:issue', (req,res)=>{
  
   let inputIssue = req.params.issue
   MongoClient.connect(adminLoginCredentials, {
-    useNewUrlParser: true,
-    useUnifiedTopology : true 
-    } ,function (err, client) {
-      if (err) throw err
+                      useNewUrlParser: true,
+                      useUnifiedTopology : true 
+                      } ,function (err, client) {
+                      if (err) throw err
       
       var db = client.db('418Admin')
       var dbPages = db.collection('comicpages')
