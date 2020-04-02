@@ -55,33 +55,37 @@ class NavBar extends React.Component {
 				</div>
 				<div>	
 					<nav className="navbar navbar-expand-sm bg-dark navbar-dark">
-						<a className="navbar-brand" href="#">
+						<div className="navbar-brand" href="#">
 							<Link to ='/' > <img src={require('../images/p5logo.png')} width="40" height="40"  /> </Link>
-						</a>
-						<ul className="navbar-nav">
-							<li className="nav-item active">
-								<Link to='/Profile' className="nav-link" href="#" >
-								Profile
-								</Link>
-							</li>
-							<li className="nav-item active"> {/* Login Link toggles modal "login" component */}
-								<a className="nav-link" href="#" data-toggle="modal" data-target="#modalLoginForm"
-								onClick={this.clickChangeWindowStatus}>
-								{this.state.showLogin ? false:true}
-								Login</a>
-							</li>
-							<a className="nav-item active">
-								<Link to='/About' className="nav-link" href="#">
-								About Us
-								</Link>
-							</a>
-							<a className="nav-item active">
-								<Link to='/BrowseComics' className="nav-link" href="#">
-								Browse!
-								</Link>
-							</a>
-						</ul>
-						
+						</div>
+						<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+   							<span className="navbar-toggler-icon"></span>
+  						</button>
+  						<div className="collapse navbar-collapse" id="navbarNav">
+							<ul className="navbar-nav">
+								<li className="nav-item active">
+									<Link to='/Profile' className="nav-link" href="#" >
+									Profile
+									</Link>
+								</li>
+								<li className="nav-item active"> {/* Login Link toggles modal "login" component */}
+									<a className="nav-link" href="#" data-toggle="modal" data-target="#modalLoginForm"
+									onClick={this.clickChangeWindowStatus}>
+									{this.state.showLogin ? false:true}
+									Login</a>
+								</li>
+								<div className="nav-item active">
+									<Link to='/About' className="nav-link" href="#">
+									About Us
+									</Link>
+								</div>
+								<div className="nav-item active">
+									<Link to='/BrowseComics' className="nav-link" href="#">
+									Browse!
+									</Link>
+								</div>
+							</ul>
+						</div>
 					</nav>
 				</div>
 			

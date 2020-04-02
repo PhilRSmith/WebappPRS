@@ -37,7 +37,7 @@ import {Link} from 'react-router-dom';
 							container
 							spacing={1}
 							direction="row"
-							justifyContent="flex-start"
+							justifycontent="flex-start"
 							alignItems="flex-start"	
 						>
 							{this.props.passDataToDynamicCards.map(elem => (

@@ -9,10 +9,7 @@ class Home extends React.Component {
 		super(props);
 		this.state = { 
 			showLogin: false ,
-			cardData: [
-            {Comic_id: '1' ,Title: 'Beginning' , Url: 'https://webcomicpages.s3.us-east-2.amazonaws.com/test.png'},
-            {Comic_id: '2' ,Title: 'Beginning' , Url: 'https://webcomicpages.s3.us-east-2.amazonaws.com/test2.png'},
-			]
+			cardData: []
 		}
 	};
 	
@@ -20,7 +17,20 @@ class Home extends React.Component {
 	
 	 getLoginWindowStatus = (loginWindowStatus) => {
         this.setState({showLogin : !loginWindowStatus});
-    };
+	};
+	
+	browseLoadHandler = () =>  {
+		var url = `${this.props.baseUrl}/browse`
+	 fetch(url)
+	 	.then((result) => result.json())
+	 	.then(result => {
+			this.setState({ cardData : result})
+		});
+	  }
+	 
+	  componentDidMount(){
+		this.browseLoadHandler()
+	  }
 	
 	render(){
 		

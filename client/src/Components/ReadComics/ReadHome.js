@@ -79,7 +79,7 @@ class ReadHome extends React.Component {
 						</button>
                 		<ul className="dropdown-menu" style = {DropdownListStyle}>
 							{this.state.cardData.map(elem => (
-								<li  onClick={() => this.clickReload()}>
+								<li  onClick={() => this.clickReload()} key = {elem.issue}>
 									<div className= 'text-left'>
 										<Link to={`/Read/${elem.issue}`}> {` - Issue: ${elem.issue} : ${elem.title}`} </Link>
 									</div>
