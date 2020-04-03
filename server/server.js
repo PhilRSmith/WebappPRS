@@ -1,6 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+//var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
@@ -8,6 +9,7 @@ var usersRouter = require('./routes/users');
 var awsCtrl = require("./routes/awsCtrl");
 var cors = require('cors');
 var app = express();
+//var SecretPayload=process.env.SecretPayload
 
 var portDev = process.env.port || 9000
 var portPub = process.env.port || 8080
@@ -26,6 +28,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+/*app.use(
+  session({
+  secret: SecretPayload, 
+  resave: false, 
+  saveUninitialized: false 
+  })
+)*/
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

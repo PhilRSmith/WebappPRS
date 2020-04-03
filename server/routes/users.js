@@ -4,13 +4,25 @@ var cors = require('cors');
 var bcrypt = require('bcrypt');
 var jwt = require("jsonwebtoken");
 const { check, validationResult} = require("express-validator");
-var bodyParser = require("body-parser");
 var mongooseSetup = require("../MongooseSetup/MongooseSetup")
 var User = require("../Schemas/userSchema");
-router.use(cors());
 var SecretPayload=process.env.SecretPayload
+//var passport = require('./passport');
+var auth = require("./authMiddleware/authorization")
+router.use(cors());
+//router.use(passport.initialize())
+//router.use(passport.session())
 
-
+router.get("/me", auth, async (req, res) => {
+  try {
+    mongooseSetup()
+    // request.user is getting fetched from Middleware after token authentication
+    const user = await User.findById(req.user.id);
+    res.json(user);
+  } catch (e) {
+    res.send({ message: "Error in Fetching user" });
+  }
+});
 /* Verify that info aligns to that of a user, or admin */
 router.post('/login', async (req, res) => {
   mongooseSetup()
@@ -29,7 +41,7 @@ router.post('/login', async (req, res) => {
       });
       if (!user)
         return res.status(400).json({
-          message: "User Not Exist"
+          message: "User Doesn't Exist"
         });
 
       const isMatch = await bcrypt.compare(password, user.password);
@@ -38,21 +50,22 @@ router.post('/login', async (req, res) => {
           message: "Incorrect Password !"
         });
 
-      const payload = {
+      const claims = {
         user: {
-          id: user.id
-        }
+              role: user.userType,
+              id: user.id
+          }
       };
 
       jwt.sign(
-        payload,
+        claims,
         `${SecretPayload}`,
         {
-          expiresIn: 7200
+          expiresIn: 10000
         },
         (err, token) => {
           if (err) throw err;
-          res.cookie('token', token, { httpOnly: true })
+          res.cookie('userToken', token, { httpOnly: true })
           res.status(200).json({
             token
           })
@@ -104,17 +117,22 @@ router.post('/register',  async (req, res) => {
 
           const salt = await bcrypt.genSalt(10);
           user.password = await bcrypt.hash(password, salt);
-
           await user.save();
-
-          const payload = {
+          
+          
+          const header = {
+            alg: "HS512",
+            typ: "JWT"
+          }
+          const claims = {
               user: {
+                  role: user.userType,
                   id: user.id
               }
           };
 
           jwt.sign(
-              payload,
+              claims,
               `${SecretPayload}`, {
                   expiresIn: 10000
               },

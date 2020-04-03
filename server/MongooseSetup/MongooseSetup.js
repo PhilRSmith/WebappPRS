@@ -7,7 +7,7 @@ var MongooseSetup = async () => {
       useNewUrlParser: true,
       useUnifiedTopology : true 
     });
-    console.log("Connected to DB");
+    console.log("DB Request made");
   } catch (e) {
     console.log(e);
     throw e;
