@@ -26,14 +26,17 @@ class Login extends React.Component {
         })
     };
 
+	
     handleLogIn = (e) => {
 		e.preventDefault()
 		console.log("form submitted");
+
         //Get route
         fetch(`${this.props.baseUrl}/users/login`, {
 			method: 'POST',
-			headers: {
-				 'Accept': 'application/json',
+			credentials: 'include',
+			headers: { 
+				'Accept': 'application/json',
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
