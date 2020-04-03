@@ -1,34 +1,47 @@
 var express = require('express');
 var router = express();
-var cors = require('cors');
 var bcrypt = require('bcrypt');
 var jwt = require("jsonwebtoken");
 const { check, validationResult} = require("express-validator");
 var mongooseSetup = require("../MongooseSetup/MongooseSetup")
 var User = require("../Schemas/userSchema");
+var session = require('express-session')
 var SecretPayload=process.env.SecretPayload
 //var passport = require('./passport');
 var auth = require("./authMiddleware/authorization")
-router.use(cors());
+
+/*router.use(
+  session({
+  secret: `${SecretPayload}`, 
+  resave: false, 
+  saveUninitialized: false 
+  })
+)*/
 //router.use(passport.initialize())
 //router.use(passport.session())
 
-router.get("/me", auth, async (req, res) => {
+router.get("/userRole", auth, async (req, res) => {
   try {
     mongooseSetup()
-    // request.user is getting fetched from Middleware after token authentication
-    const user = await User.findById(req.user.id);
-    res.json(user);
+    //curSession=req.session
+    //curSession.email;
+    //if(curSession.email){
+      // request.user is getting fetched from Middleware after token authentication
+      const user = await User.findById(req.user.id);
+      res.json(user.userType);
+    //}
   } catch (e) {
     res.send({ message: "Error in Fetching user" });
   }
 });
+
 /* Verify that info aligns to that of a user, or admin */
 router.post('/login', async (req, res) => {
   mongooseSetup()
   const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
+      console.log('this bitch empty, YEET')
       return res.status(400).json({
         errors: errors.array()
       });
@@ -39,16 +52,20 @@ router.post('/login', async (req, res) => {
       let user = await User.findOne({
         email
       });
-      if (!user)
+      if (!user){
+        console.log('not a valid user')
         return res.status(400).json({
           message: "User Doesn't Exist"
-        });
+        })
+      }
 
       const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch)
+      if (!isMatch){
+        console.log('Password Wrong')
         return res.status(400).json({
           message: "Incorrect Password !"
-        });
+        })
+      }
 
       const claims = {
         user: {
@@ -65,7 +82,7 @@ router.post('/login', async (req, res) => {
         },
         (err, token) => {
           if (err) throw err;
-          res.cookie('userToken', token, { httpOnly: true })
+          res.cookie('userToken', token)
           res.status(200).json({
             token
           })
@@ -138,7 +155,7 @@ router.post('/register',  async (req, res) => {
               },
               (err, token) => {
                   if (err) throw err;
-                  res.cookie('token', token, { httpOnly: true })
+                  res.cookie('token', token, { httpOnly: false })
                   res.status(200).json({
                     token
                   })

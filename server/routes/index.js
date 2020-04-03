@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express();
 var MongoClient = require('mongodb').MongoClient
-var cors = require('cors');
-router.use(cors());
 
 router.get('/', (req, res, next) => {
 	res.render( 'index' , {title: 'Express' })
