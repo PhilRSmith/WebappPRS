@@ -50,7 +50,7 @@ import {Link} from 'react-router-dom';
 										<CardContent>
 											<Typography  component={'span'}>
 												<div className="container" style={this.state.imagedesc}>
-												<img src= {elem.img_url} width = "100%" />
+												<img src= {elem.img_url} width = "100%" alt = 'empty' />
 												</div>
 											</Typography>
 										</CardContent>

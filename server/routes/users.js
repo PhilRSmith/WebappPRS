@@ -1,15 +1,31 @@
 var express = require('express');
 var router = express();
-var cors = require('cors');
 var bcrypt = require('bcrypt');
 var jwt = require("jsonwebtoken");
 const { check, validationResult} = require("express-validator");
-var bodyParser = require("body-parser");
-var mongooseSetup = require("../MongooseSetup/MongooseSetupUsers")
-var User = require("../userLayout/userLayout");
-router.use(cors());
+var mongooseSetup = require("../MongooseSetup/MongooseSetup")
+var User = require("../Schemas/userSchema");
 var SecretPayload=process.env.SecretPayload
+//var passport = require('./passport');
+var auth = require("./authMiddleware/authorization")
 
+
+router.get("/userRole", async (req, res) => {
+  console.log(req.cookies.token)
+  var token = req.cookies.token
+  mongooseSetup()
+
+  if (!token) return res.json('guest')
+  try {
+    const decoded = jwt.verify(token, `${SecretPayload}`);
+    var userRole = decoded.user.role;
+    console.log('userRole: ' + userRole)
+    res.json(userRole)
+  } catch (e) {
+    console.error(e);
+    res.json('guest');
+  }
+});
 
 /* Verify that info aligns to that of a user, or admin */
 router.post('/login', async (req, res) => {
@@ -17,6 +33,7 @@ router.post('/login', async (req, res) => {
   const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
+      console.log('this bitch empty, YEET')
       return res.status(400).json({
         errors: errors.array()
       });
@@ -27,32 +44,37 @@ router.post('/login', async (req, res) => {
       let user = await User.findOne({
         email
       });
-      if (!user)
+      if (!user){
+        console.log('not a valid user')
         return res.status(400).json({
-          message: "User Not Exist"
-        });
+          message: "User Doesn't Exist"
+        })
+      }
 
       const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch)
+      if (!isMatch){
+        console.log('Password Wrong')
         return res.status(400).json({
           message: "Incorrect Password !"
-        });
+        })
+      }
 
-      const payload = {
+      const claims = {
         user: {
-          id: user.id
-        }
+              role: user.userType,
+              id: user.id
+          }
       };
 
       jwt.sign(
-        payload,
+        claims,
         `${SecretPayload}`,
         {
-          expiresIn: 7200
+          expiresIn: 10000
         },
         (err, token) => {
           if (err) throw err;
-          res.cookie('token', token, { httpOnly: true })
+          res.cookie('token', token)
           res.status(200).json({
             token
           })
@@ -104,23 +126,28 @@ router.post('/register',  async (req, res) => {
 
           const salt = await bcrypt.genSalt(10);
           user.password = await bcrypt.hash(password, salt);
-
-          await user.save();
-
-          const payload = {
+          no
+          
+          
+          const header = {
+            alg: "HS512",
+            typ: "JWT"
+          }
+          const claims = {
               user: {
+                  role: user.userType,
                   id: user.id
               }
           };
 
           jwt.sign(
-              payload,
+              claims,
               `${SecretPayload}`, {
                   expiresIn: 10000
               },
               (err, token) => {
                   if (err) throw err;
-                  res.cookie('token', token, { httpOnly: true })
+                  res.cookie('token', token, { httpOnly: false })
                   res.status(200).json({
                     token
                   })

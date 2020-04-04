@@ -7,13 +7,13 @@ class Profile extends React.Component {
 		super(props);
 		this.state = {
 		servOutput: null,
-		profImage: require('../images/p5morgana.png'),
+		profImage: 'https://webcomicpages.s3.us-east-2.amazonaws.com/stock_profile_img.jpg' ,
 		profName: "Morgana",
 		profDesc: "Is he a cat? Is he a car? Was he human before? We may never know..."
 		}
 	};
 	profClickHandler = () =>  {
-		var url = 'http://localhost:9000/profile'
+		var url = `${this.props.baseUrl}/profile`
 	 fetch(url)
 	 .then((result) => result.json())
 	 .then(result => {
@@ -33,7 +33,7 @@ class Profile extends React.Component {
 					<div className="card bg-dark text-white">
 					  <div className="card-header">{this.state.profName}</div>
 					  		<div className="card-body">
-					  		 <img src={this.state.profImage} width="500vh%" height="500vh" alt="Logo" /> 
+					  		 <img src={this.state.profImage} width="500vh%" height="500vh" alt="empty" /> 
 					  		</div>
 					  <div className="card-footer"><p>BIO: {this.state.profDesc}</p></div>
 					</div>

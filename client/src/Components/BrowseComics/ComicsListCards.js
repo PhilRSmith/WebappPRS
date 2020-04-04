@@ -49,7 +49,7 @@ import {Link} from 'react-router-dom';
 										<CardContent>
 											<Typography  component={'span'}>
                                                 <div className="container" style={this.state.imagedesc}>
-												<img src= {elem.img_url} width = "160px" height = "240px"  />
+												<img src= {elem.img_url} width = "160px" height = "240px" alt = 'empty' />
 												</div>
 											</Typography>
 										</CardContent>

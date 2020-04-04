@@ -1,16 +1,13 @@
 import React from 'react'
 import 'bootstrap/dist/js/bootstrap.bundle'
-import axios from 'axios'
 import Pages from './Pages'
 import {Link} from 'react-router-dom';	
 
-var urlBase ='http://localhost:9000'
 
 class ReadHome extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = { 
-            showLogin: false ,
             pathName: '',
 			pageData:[],
 			cardData: []   
@@ -18,11 +15,6 @@ class ReadHome extends React.Component {
 	};
 	
 		 
-	
-	 getLoginWindowStatus = (loginWindowStatus) => {
-        this.setState({showLogin : !loginWindowStatus});
-	};
-    
     pageLoadHandler = () =>  {
         var curPath = window.location.pathname
         this.setState({pathName: curPath})
