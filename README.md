@@ -1,4 +1,4 @@
-418Y Term project:
+Web-comic host site
 MERN STACK
 
 
