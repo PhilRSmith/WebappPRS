@@ -5,33 +5,25 @@ var jwt = require("jsonwebtoken");
 const { check, validationResult} = require("express-validator");
 var mongooseSetup = require("../MongooseSetup/MongooseSetup")
 var User = require("../Schemas/userSchema");
-var session = require('express-session')
 var SecretPayload=process.env.SecretPayload
 //var passport = require('./passport');
 var auth = require("./authMiddleware/authorization")
 
-/*router.use(
-  session({
-  secret: `${SecretPayload}`, 
-  resave: false, 
-  saveUninitialized: false 
-  })
-)*/
-//router.use(passport.initialize())
-//router.use(passport.session())
 
-router.get("/userRole", auth, async (req, res) => {
+router.get("/userRole", async (req, res) => {
+  console.log(req.cookies.token)
+  var token = req.cookies.token
+  mongooseSetup()
+
+  if (!token) return res.json('guest')
   try {
-    mongooseSetup()
-    //curSession=req.session
-    //curSession.email;
-    //if(curSession.email){
-      // request.user is getting fetched from Middleware after token authentication
-      const user = await User.findById(req.user.id);
-      res.json(user.userType);
-    //}
+    const decoded = jwt.verify(token, `${SecretPayload}`);
+    var userRole = decoded.user.role;
+    console.log('userRole: ' + userRole)
+    res.json(userRole)
   } catch (e) {
-    res.send({ message: "Error in Fetching user" });
+    console.error(e);
+    res.json('guest');
   }
 });
 
@@ -134,7 +126,7 @@ router.post('/register',  async (req, res) => {
 
           const salt = await bcrypt.genSalt(10);
           user.password = await bcrypt.hash(password, salt);
-          await user.save();
+          no
           
           
           const header = {

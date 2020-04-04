@@ -8,7 +8,6 @@ class ReadHome extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = { 
-            showLogin: false ,
             pathName: '',
 			pageData:[],
 			cardData: []   
@@ -16,11 +15,6 @@ class ReadHome extends React.Component {
 	};
 	
 		 
-	
-	 getLoginWindowStatus = (loginWindowStatus) => {
-        this.setState({showLogin : !loginWindowStatus});
-	};
-    
     pageLoadHandler = () =>  {
         var curPath = window.location.pathname
         this.setState({pathName: curPath})

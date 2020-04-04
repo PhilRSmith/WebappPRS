@@ -5,10 +5,10 @@ import ComicsListDropdown from './ComicsListDropdown'
 
 
 class ComicsBase extends React.Component {
+	_isMounted = false;
 	constructor(props){
 		super(props);
 		this.state = { 
-			showLogin: false ,
 			tempData:[],
 			cardData: []   
 		}
@@ -20,13 +20,21 @@ class ComicsBase extends React.Component {
 	 fetch(url)
 	 	.then((result) => result.json())
 	 	.then(result => {
+			if (this._isMounted) {
 			this.setState({ cardData : result})
+			}
 		});
 	  }
 	 
 	  componentDidMount(){
+		this._isMounted = true;
 		this.browseLoadHandler()
-	  }
+		
+	  };
+	  
+	  componentWillUnmount() {
+		this._isMounted = false;
+	  };
 	
 	render(){
 

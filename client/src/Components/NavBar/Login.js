@@ -1,5 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import '../util/routeHome'
+import { routeHome } from '../util/routeHome';
 
 /*Modal structure taken from https://mdbootstrap.com/docs/jquery/modals/forms/ */
 class Login extends React.Component {
@@ -50,7 +52,12 @@ class Login extends React.Component {
                     console.log(Object.entries(result));
                 }
                 // Call to set state in top level App component
-                this.props.passLoginStatus(result.status)
+				this.props.passLoginStatus(result.status === 200);
+				if (this.props.loginStatus){
+					routeHome()
+				} 
+				
+
             })
             .catch((error) => {
                 console.log('error');
@@ -94,7 +101,7 @@ class Login extends React.Component {
 
 					      </div>
 					      <div className="modal-footer d-flex justify-content-center">
-					        <button className="btn btn-default">Login</button>
+					        <button className="btn btn-default" data-toggle="modal" data-target="#modalLoginForm">Login</button>
 					      </div>
 						</form>
 				  	</div>
