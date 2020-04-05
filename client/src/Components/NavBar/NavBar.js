@@ -33,7 +33,7 @@ class NavBar extends React.Component {
 			<div>	
 				<nav className="navbar navbar-expand-sm bg-dark navbar-dark">
 					<div className="navbar-brand" href="#">
-						<Link to ='/' > <img src={require('../images/p5logo.png')} width="40" height="40" alt ='empty'  /> </Link>
+						<img src={require('../images/p5logo.png')} width="40" height="40" alt ='empty'  /> 
 					</div>
 					<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 						<span className="navbar-toggler-icon"></span>
@@ -41,8 +41,8 @@ class NavBar extends React.Component {
 					<div className="collapse navbar-collapse" id="navbarNav">
 						<ul className="navbar-nav">
 							<li className="nav-item active">
-								<Link to='/Profile' className="nav-link" href="#" >
-								Profile
+								<Link to='/' className="nav-link" href="#" >
+								Home
 								</Link>
 							</li>
 							<li className="nav-item active"> {/* Login Link toggles modal "login" component */}
@@ -71,21 +71,26 @@ class NavBar extends React.Component {
 	if(this.props.userRole ==="user" ) {
 	return (
 
-		<React.Fragment>
-			<div className = 'container-left' style={NavStyle}>
-				<img src={require('../images/p5wallpaper.png')} width= "80%" alt= 'empty' />
-				<img src={require('../images/p5morgana2.png')} width = "20%" alt= 'empty' />
-			</div>
-			<div>	
-				<nav className="navbar navbar-expand-sm bg-dark navbar-dark">
-					<div className="navbar-brand" href="#">
-						<Link to ='/' > <img src={require('../images/p5logo.png')} width="40" height="40" alt ='empty'  /> </Link>
-					</div>
+			<React.Fragment>
+				<div className = 'container-left' style={NavStyle}>
+					<img src={require('../images/p5wallpaper.png')} width= "80%" alt= 'empty' />
+					<img src={require('../images/p5morgana2.png')} width = "20%" alt= 'empty' />
+				</div>
+				<div>	
+					<nav className="navbar navbar-expand-sm bg-dark navbar-dark">
+						<div className="navbar-brand" href="#">
+							<img src={require('../images/p5logo.png')} width="40" height="40" alt ='empty'  /> 
+						</div>
 					<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-							<span className="navbar-toggler-icon"></span>
-						</button>
-						<div className="collapse navbar-collapse" id="navbarNav">
+						<span className="navbar-toggler-icon"></span>
+					</button>
+					<div className="collapse navbar-collapse" id="navbarNav">
 						<ul className="navbar-nav">
+							<li className="nav-item active">
+								<Link to='/' className="nav-link" href="#" >
+								Home
+								</Link>
+							</li>
 							<li className="nav-item active">
 								<Link to='/Profile' className="nav-link" href="#" >
 								Profile
@@ -125,13 +130,18 @@ class NavBar extends React.Component {
 				<div>	
 					<nav className="navbar navbar-expand-sm bg-dark navbar-dark">
 						<div className="navbar-brand" href="#">
-							<Link to ='/' > <img src={require('../images/p5logo.png')} width="40" height="40" alt ='empty'  /> </Link>
+							<img src={require('../images/p5logo.png')} width="40" height="40" alt ='empty'  /> 
 						</div>
-						<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-								<span className="navbar-toggler-icon"></span>
-							</button>
-							<div className="collapse navbar-collapse" id="navbarNav">
-							<ul className="navbar-nav">
+					<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+						<span className="navbar-toggler-icon"></span>
+					</button>
+					<div className="collapse navbar-collapse" id="navbarNav">
+						<ul className="navbar-nav">
+							<li className="nav-item active">
+								<Link to='/' className="nav-link" href="#" >
+								Home
+								</Link>
+							</li>
 								<li className="nav-item active">
 									<Link to='/Profile' className="nav-link" href="#" >
 									Profile

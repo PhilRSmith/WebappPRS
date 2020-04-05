@@ -1,11 +1,26 @@
 var aws = require('aws-sdk'); 
 var express = require('express');
 var router = express.Router();
-var mongooseSetup = require("../MongooseSetup/MongooseSetup")
+var mongoose = require("mongoose");
 const { check, validationResult} = require("express-validator");
 var jwt = require("jsonwebtoken");
 var SecretPayload=process.env.SecretPayload
 var comicUploadSchema = require("../Schemas/comicUploadSchema");
+
+var mongooseSetup = async () => {
+  var adminLoginCredentials=process.env.DBAccess
+  try {
+    await mongoose.connect(adminLoginCredentials,  {
+      useNewUrlParser: true,
+      useUnifiedTopology : true 
+    });
+    console.log("DB Request made");
+   
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};
 
 router.post('/', async function(req, res) {
   const S3_BUCKET = process.env.bucket
@@ -15,7 +30,10 @@ router.post('/', async function(req, res) {
  
   mongooseSetup()
   
-  if (!token) {return res.json('Authentication Error')}
+  if (!token) {
+    mongoose.disconnect()
+    return res.json('Authentication Error')
+  }
     try {
       const decoded = jwt.verify(token, `${SecretPayload}`);
       var role = decoded.user.role;
@@ -50,6 +68,7 @@ router.post('/', async function(req, res) {
             s3.getSignedUrl('putObject', s3Params, (err, data) => {
               if (err) {
                 console.log(err);
+                mongoose.disconnect()
                 res.json({ success: false, error: err })
               }
               // Data payload of what we are sending back, the url of the signedRequest and a URL where we can access the content after its saved. 
@@ -69,19 +88,22 @@ router.post('/', async function(req, res) {
               img_url
             })
             await comicpage.save();
-          
           }
           else{
+            mongoose.disconnect()
             console.log('INSUFFICIENT INFO')
             res.json('INSUFFICIENT INFO')
           }
           }
         else{
+          mongoose.disconnect()
           console.log('UNAUTHORIZED ACCESS')
           res.json('UNAUTHORIZED ACCESS')
         }
+        mongoose.disconnect()
     } catch (e) {
       console.error(e);
+      mongoose.disconnect()
       res.json('Authentication Error');
     }
 
