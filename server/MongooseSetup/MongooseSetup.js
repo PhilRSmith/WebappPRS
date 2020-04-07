@@ -8,6 +8,7 @@ var MongooseSetup = async () => {
       useUnifiedTopology : true 
     });
     console.log("DB Request made");
+   
   } catch (e) {
     console.log(e);
     throw e;

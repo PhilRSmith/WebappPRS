@@ -3,12 +3,26 @@ var router = express();
 var bcrypt = require('bcrypt');
 var jwt = require("jsonwebtoken");
 const { check, validationResult} = require("express-validator");
-var mongooseSetup = require("../MongooseSetup/MongooseSetup")
+var mongoose = require("mongoose");
 var User = require("../Schemas/userSchema");
 var SecretPayload=process.env.SecretPayload
 //var passport = require('./passport');
 var auth = require("./authMiddleware/authorization")
 
+var mongooseSetup = async () => {
+  var adminLoginCredentials=process.env.DBAccess
+  try {
+    await mongoose.connect(adminLoginCredentials,  {
+      useNewUrlParser: true,
+      useUnifiedTopology : true 
+    });
+    console.log("DB Request made");
+   
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};
 
 router.get("/userRole", async (req, res) => {
   console.log(req.cookies.token)
@@ -21,9 +35,12 @@ router.get("/userRole", async (req, res) => {
     var userRole = decoded.user.role;
     console.log('userRole: ' + userRole)
     res.json(userRole)
+    mongoose.disconnect()
   } catch (e) {
     console.error(e);
     res.json('guest');
+    mongoose.disconnect()
+    
   }
 });
 
@@ -34,6 +51,7 @@ router.post('/login', async (req, res) => {
 
     if (!errors.isEmpty()) {
       console.log('this bitch empty, YEET')
+      mongoose.disconnect()
       return res.status(400).json({
         errors: errors.array()
       });
@@ -46,6 +64,7 @@ router.post('/login', async (req, res) => {
       });
       if (!user){
         console.log('not a valid user')
+        mongoose.disconnect()
         return res.status(400).json({
           message: "User Doesn't Exist"
         })
@@ -54,6 +73,7 @@ router.post('/login', async (req, res) => {
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch){
         console.log('Password Wrong')
+        mongoose.disconnect()
         return res.status(400).json({
           message: "Incorrect Password !"
         })
@@ -74,6 +94,7 @@ router.post('/login', async (req, res) => {
         },
         (err, token) => {
           if (err) throw err;
+          mongoose.disconnect()
           res.cookie('token', token)
           res.status(200).json({
             token
@@ -83,6 +104,7 @@ router.post('/login', async (req, res) => {
       );
     } catch (e) {
       console.error(e);
+      mongoose.disconnect()
       res.status(500).json({
         message: "Server Error"
       });
@@ -96,6 +118,7 @@ router.post('/register',  async (req, res) => {
   mongooseSetup()
   const errors = validationResult(req);
       if (!errors.isEmpty()) {
+        mongoose.disconnect()
           return res.status(400).json({
               errors: errors.array()
           });
@@ -113,6 +136,7 @@ router.post('/register',  async (req, res) => {
               email
           });
           if (user) {
+            mongoose.disconnect()
               return res.status(400).json({
                   msg: "User Already Exists"
               });
@@ -147,6 +171,7 @@ router.post('/register',  async (req, res) => {
               },
               (err, token) => {
                   if (err) throw err;
+                  mongoose.disconnect()
                   res.cookie('token', token, { httpOnly: false })
                   res.status(200).json({
                     token
@@ -154,6 +179,7 @@ router.post('/register',  async (req, res) => {
               }
           );
       } catch (err) {
+        mongoose.disconnect()
           console.log(err.message);
           res.status(500).send("Error in Saving");
       }

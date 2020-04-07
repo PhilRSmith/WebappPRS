@@ -15,9 +15,10 @@ router.get('/profile', (req, res) => {
                       useUnifiedTopology : true 
                       } , function (err, client) {
                       if (err) throw err
-    
+     res.json({ express: 'express backend linked to react' })
+     client.close()
                       })
-	res.json({ express: 'express backend linked to react' })
+  
   });
 
 /* load all issues of comics (front page of each) */
@@ -35,6 +36,8 @@ router.get('/browse', (req, res) => {
     dbPages.find({page: '1'}).toArray((err, items)=>{
      if (err) throw err
       res.json(items)
+      client.close()
+      console.log('closed connection')
     })
     
   })
@@ -58,6 +61,8 @@ router.get('/Read/:issue', (req,res)=>{
       dbPages.find({issue: inputIssue}).toArray((err, items)=>{
        if (err) throw err
         res.json(items)
+        client.close()
+        console.log('closed connection')
       })
   });
 })
