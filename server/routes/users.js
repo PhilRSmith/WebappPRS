@@ -17,7 +17,6 @@ var mongooseSetup = async () => {
       useUnifiedTopology : true 
     });
     console.log("DB Request made");
-   
   } catch (e) {
     console.log(e);
     throw e;
@@ -34,14 +33,15 @@ router.get("/userRole", async (req, res) => {
     const decoded = jwt.verify(token, `${SecretPayload}`);
     var userRole = decoded.user.role;
     console.log('userRole: ' + userRole)
-    res.json(userRole)
     mongoose.disconnect()
+    res.json(userRole)
+    
   } catch (e) {
     console.error(e);
-    res.json('guest');
     mongoose.disconnect()
-    
+    res.json('guest'); 
   }
+  mongoose.disconnect()
 });
 
 /* Verify that info aligns to that of a user, or admin */
