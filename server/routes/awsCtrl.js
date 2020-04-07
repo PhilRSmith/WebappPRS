@@ -15,7 +15,6 @@ var mongooseSetup = async () => {
       useUnifiedTopology : true 
     });
     console.log("DB Request made");
-   
   } catch (e) {
     console.log(e);
     throw e;
@@ -100,7 +99,7 @@ router.post('/', async function(req, res) {
           console.log('UNAUTHORIZED ACCESS')
           res.json('UNAUTHORIZED ACCESS')
         }
-        mongoose.disconnect()
+        mongoose.connection.close()
     } catch (e) {
       console.error(e);
       mongoose.disconnect()
