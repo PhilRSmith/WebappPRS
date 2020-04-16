@@ -9,8 +9,8 @@ var cors = require('cors');
 var express = require('express');
 var app = express();
 //var SecretPayload=process.env.SecretPayload
-var portDev = process.env.port || 9000
-var portPub = process.env.port || 8080
+//var portDev = process.env.port || 9000
+//var portPub = process.env.port || 8080
 
 var allowedOrigins = ['http://localhost:9000',
                       'http://localhost:3000',
@@ -24,7 +24,7 @@ require('dotenv').config();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.listen(portDev, () => console.log(`Listening on port ${portDev}`));
+//app.listen(portDev, () => console.log(`Listening on port ${portDev}`));
 app.use(logger('dev'));
 app.use(cors({
     credentials: true ,
