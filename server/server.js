@@ -8,8 +8,9 @@ var awsCtrl = require("./routes/awsCtrl");
 var cors = require('cors');
 var express = require('express');
 var app = express();
+require('dotenv').config();
 //var SecretPayload=process.env.SecretPayload
-//var portDev = process.env.port || 9000
+var portDev = process.env.port || 9000
 //var portPub = process.env.port || 8080
 
 var allowedOrigins = ['http://localhost:9000',
@@ -18,14 +19,14 @@ var allowedOrigins = ['http://localhost:9000',
                       'http://ec2-3-21-56-228.us-east-2.compute.amazonaws.com'
                       ];
 
-require('dotenv').config();
+
 
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-//app.listen(portDev, () => console.log(`Listening on port ${portDev}`));
+app.listen(portDev, () => console.log(`Listening on port ${portDev}`));
 app.use(logger('dev'));
 app.use(cors({
     credentials: true ,
