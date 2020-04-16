@@ -18,7 +18,8 @@ class App extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = { 
-			homeUrl: 'http://localhost:9000',
+			homeUrl: 'http://ec2-3-21-56-228.us-east-2.compute.amazonaws.com:9000',
+			//homeUrl: 'http://localhost:9000',
 			loginStatus: false,
 			userRole: 'guest'
 		}
