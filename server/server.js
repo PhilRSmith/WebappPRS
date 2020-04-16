@@ -14,7 +14,8 @@ var app = express();
 
 var allowedOrigins = ['http://localhost:9000',
                       'http://localhost:3000',
-                      'https://webcomicpages.s3.us-east-2.amazonaws.com'
+                      'https://webcomicpages.s3.us-east-2.amazonaws.com',
+                      'http://ec2-3-21-56-228.us-east-2.compute.amazonaws.com'
                       ];
 
 require('dotenv').config();
