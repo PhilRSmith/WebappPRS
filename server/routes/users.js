@@ -3,13 +3,13 @@ var router = express();
 var bcrypt = require('bcrypt');
 var jwt = require("jsonwebtoken");
 const { check, validationResult} = require("express-validator");
-var mongoose = require("mongoose");
+//var mongoose = require("mongoose");
 var User = require("../Schemas/userSchema");
 var SecretPayload=process.env.SecretPayload
 //var passport = require('./passport');
 var auth = require("./authMiddleware/authorization")
 
-var mongooseSetup = async () => {
+/*var mongooseSetup = async () => {
   var adminLoginCredentials=process.env.DBAccess
   try {
     await mongoose.connect(adminLoginCredentials,  {
@@ -21,37 +21,37 @@ var mongooseSetup = async () => {
     console.log(e);
     throw e;
   }
-};
+};*/
 
 router.get("/userRole", async (req, res) => {
   console.log(req.cookies.token)
   var token = req.cookies.token
-  mongooseSetup()
+  //mongooseSetup()
 
   if (!token) return res.json('guest')
   try {
     const decoded = jwt.verify(token, `${SecretPayload}`);
     var userRole = decoded.user.role;
     console.log('userRole: ' + userRole)
-    mongoose.disconnect()
+    //mongoose.disconnect()
     res.json(userRole)
     
   } catch (e) {
     console.error(e);
-    mongoose.disconnect()
+    //mongoose.disconnect()
     res.json('guest'); 
   }
-  mongoose.disconnect()
+  //mongoose.disconnect()
 });
 
 /* Verify that info aligns to that of a user, or admin */
 router.post('/login', async (req, res) => {
-  mongooseSetup()
+  //mongooseSetup()
   const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
       console.log('this bitch empty, YEET')
-      mongoose.disconnect()
+      //mongoose.disconnect()
       return res.status(400).json({
         errors: errors.array()
       });
@@ -64,7 +64,7 @@ router.post('/login', async (req, res) => {
       });
       if (!user){
         console.log('not a valid user')
-        mongoose.disconnect()
+        //mongoose.disconnect()
         return res.status(400).json({
           message: "User Doesn't Exist"
         })
@@ -73,7 +73,7 @@ router.post('/login', async (req, res) => {
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch){
         console.log('Password Wrong')
-        mongoose.disconnect()
+        //mongoose.disconnect()
         return res.status(400).json({
           message: "Incorrect Password !"
         })
@@ -94,7 +94,7 @@ router.post('/login', async (req, res) => {
         },
         (err, token) => {
           if (err) throw err;
-          mongoose.disconnect()
+          //mongoose.disconnect()
           res.cookie('token', token)
           res.status(200).json({
             token
@@ -104,7 +104,7 @@ router.post('/login', async (req, res) => {
       );
     } catch (e) {
       console.error(e);
-      mongoose.disconnect()
+      //mongoose.disconnect()
       res.status(500).json({
         message: "Server Error"
       });
@@ -115,10 +115,10 @@ router.post('/login', async (req, res) => {
 /**/ 
 /* Verify that email not already used, and add new user */
 router.post('/register',  async (req, res) => {
-  mongooseSetup()
+  //mongooseSetup()
   const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        mongoose.disconnect()
+        //mongoose.disconnect()
           return res.status(400).json({
               errors: errors.array()
           });
@@ -136,7 +136,7 @@ router.post('/register',  async (req, res) => {
               email
           });
           if (user) {
-            mongoose.disconnect()
+            //mongoose.disconnect()
               return res.status(400).json({
                   msg: "User Already Exists"
               });
@@ -150,7 +150,7 @@ router.post('/register',  async (req, res) => {
 
           const salt = await bcrypt.genSalt(10);
           user.password = await bcrypt.hash(password, salt);
-          no
+          
           
           
           const header = {
@@ -164,6 +164,7 @@ router.post('/register',  async (req, res) => {
               }
           };
 
+          user.save()
           jwt.sign(
               claims,
               `${SecretPayload}`, {
@@ -171,19 +172,26 @@ router.post('/register',  async (req, res) => {
               },
               (err, token) => {
                   if (err) throw err;
-                  mongoose.disconnect()
+                  //mongoose.disconnect()
                   res.cookie('token', token, { httpOnly: false })
+                  console.log('successful user creation')
                   res.status(200).json({
                     token
                   })
               }
           );
       } catch (err) {
-        mongoose.disconnect()
+        //mongoose.disconnect()
           console.log(err.message);
           res.status(500).send("Error in Saving");
       }
   
+})
+
+router.get('/logout', (req, res) => {
+  res.cookie('token', {path :'/'}, {expire: Date.now() })
+  res.status(200)
+  console.log('logged out')
 })
  
 

@@ -7,11 +7,11 @@ const comicUploadSchema = mongoose.Schema({
     required: true
   },
   issue: {
-    type: String,
+    type: Number,
     required: true
   },
   page: {
-    type: String,
+    type: Number,
     required: true
   },
   img_url: {

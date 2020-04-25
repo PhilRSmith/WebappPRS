@@ -2,7 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../util/routeHome'
 import { routeHome } from '../util/routeHome';
-
+import {Link} from 'react-router-dom';	
 /*Modal structure taken from https://mdbootstrap.com/docs/jquery/modals/forms/ */
 class Login extends React.Component {
   constructor(props) {
@@ -78,12 +78,16 @@ class Login extends React.Component {
 					  aria-hidden="true" >
 						  <div className="modal-dialog" role="document" show ={{String: "true"}}>
 						    <form className="modal-content" onChange={this.handleInputChange} onSubmit={this.handleLogIn}>
-						      <div className="modal-header text-center">
+							  <div className="modal-header text-center">
 						        <h4 className="modal-title w-100 font-weight-bold">Sign in</h4>
 						        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
 						          <span aria-hidden="true">&times;</span>
-						        </button>
-						      </div>
+								</button>
+							  </div>
+							  <Link to = '/Register' className="nav-link" href="#" >
+								<h5  aria-label='close'>
+								 No Account? Register here</h5>
+								</Link>
 					      <div className="modal-body mx-3">
 					        <div className="md-form mb-5">
 					          <i className="fas fa-envelope prefix grey-text"></i>

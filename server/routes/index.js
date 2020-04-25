@@ -33,11 +33,11 @@ router.get('/browse', (req, res) => {
     var db = client.db('418Admin')
     var dbPages = db.collection('comicpages')
 
-    dbPages.find({page: '1'}).toArray((err, items)=>{
+    dbPages.find({page: 1}).toArray((err, items)=>{
      if (err) throw err
       res.json(items)
       client.close()
-      console.log('closed connection')
+      //console.log('closed connection')
     })
     
   })
@@ -48,7 +48,7 @@ router.get('/browse', (req, res) => {
 router.get('/Read/:issue', (req,res)=>{ 
   const adminLoginCredentials=process.env.DBAccess
  
-  let inputIssue = req.params.issue
+  let inputIssue = parseInt(req.params.issue)
   MongoClient.connect(adminLoginCredentials, {
                       useNewUrlParser: true,
                       useUnifiedTopology : true 
@@ -62,7 +62,7 @@ router.get('/Read/:issue', (req,res)=>{
        if (err) throw err
         res.json(items)
         client.close()
-        console.log('closed connection')
+        //console.log('closed connection')
       })
   });
 })

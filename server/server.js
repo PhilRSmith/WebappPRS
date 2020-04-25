@@ -8,9 +8,11 @@ var awsCtrl = require("./routes/awsCtrl");
 var cors = require('cors');
 var express = require('express');
 var app = express();
+var mongoose = require("mongoose");
 require('dotenv').config();
+
 //var SecretPayload=process.env.SecretPayload
-//var portDev = process.env.port || 9000
+var portDev = process.env.port || 9000
 //var portPub = process.env.port || 8080
 
 var allowedOrigins = ['http://localhost:9000',
@@ -21,12 +23,11 @@ var allowedOrigins = ['http://localhost:9000',
 
 
 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-//app.listen(portDev, () => console.log(`Listening on port ${portDev}`));
+app.listen(portDev, () => console.log(`Listening on port ${portDev}`));
 app.use(logger('dev'));
 app.use(cors({
     credentials: true ,
@@ -46,6 +47,22 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+var mongooseSetup = async () => {
+  var adminLoginCredentials=process.env.DBAccess
+  try {
+    await mongoose.connect(adminLoginCredentials,  {
+      useNewUrlParser: true,
+      useUnifiedTopology : true 
+    });
+    console.log("DB Request made");
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};
+
+mongooseSetup()
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

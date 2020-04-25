@@ -22,6 +22,10 @@ const userSchema = mongoose.Schema({
     type: String,
     default: 'https://webcomicpages.s3.us-east-2.amazonaws.com/stock_profile_img.jpg'
   },
+  profile_desc: {
+    type: String,
+    default: ''
+  },
   createdAt: {
     type: Date,
     default: Date.now()

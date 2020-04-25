@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Link} from 'react-router-dom';
+import { routeHome } from '../util/routeHome';
 
 /*basic BootStrap Code provided within W3 Tutorials, edited for my use*/
 class NavBar extends React.Component {
@@ -9,8 +10,20 @@ class NavBar extends React.Component {
 		this.state = {
 		}
 	};
+	clickReload = () => {
+		routeHome()	
+	}
 	
-	 
+	 logout = () => {
+		var url = `${this.props.baseUrl}/users/logout`
+		fetch(url , {
+			method: 'GET',
+			credentials: 'include',
+		 })
+		.then(
+		this.clickReload()
+		)
+	 }
 	  render() {
 
 		var NavStyle = {
@@ -97,8 +110,8 @@ class NavBar extends React.Component {
 								</Link>
 							</li>
 							<li className="nav-item active"> {/* Login Link toggles modal "login" component */}
-								<a className="nav-link" href="#">
-								Logout</a>
+								<a className="nav-link">
+								Logged In</a>
 							</li>
 							<div className="nav-item active">
 								<Link to='/About' className="nav-link" href="#">
@@ -148,8 +161,8 @@ class NavBar extends React.Component {
 									</Link>
 								</li>
 								<li className="nav-item active"> {/* Login Link toggles modal "login" component */}
-									<a className="nav-link" href="#" >
-									Logout</a>
+									<a className="nav-link" >
+									Logged In</a>
 								</li>
 								<div className="nav-item active">
 									<Link to='/About' className="nav-link" href="#">

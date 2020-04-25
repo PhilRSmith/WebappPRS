@@ -8,6 +8,7 @@ import ProfMain from './Components/Profile/ProfMain'
 import Home from './Components/Home/Home'
 import ComicsBase from './Components/BrowseComics/ComicsBase'
 import ReadHome from './Components/ReadComics/ReadHome'
+import RegisterPage from './Components/Register/RegisterPage'
 import About from './Components/About/About'
 import Upload from './Components/Upload/UploadHome'
 import {userRole} from './Components/Authentication/Authenticate'
@@ -18,8 +19,8 @@ class App extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = { 
-			homeUrl: 'http://ec2-3-21-56-228.us-east-2.compute.amazonaws.com:9000',
-			//homeUrl: 'http://localhost:9000',
+			//homeUrl: 'http://ec2-3-21-56-228.us-east-2.compute.amazonaws.com:9000',
+			homeUrl: 'http://localhost:9000',
 			loginStatus: false,
 			userRole: 'guest'
 		}
@@ -135,6 +136,14 @@ class App extends React.Component {
 								userRole = {this.state.userRole}
 								loginStatus= {this.state.loginStatus}  
 								baseUrl = {this.state.homeUrl} />	
+						} />	
+						<Route path="/Register" component={
+							() => 
+								<RegisterPage
+								userRole = {this.state.userRole}
+								loginStatus= {this.state.loginStatus}  
+								baseUrl = {this.state.homeUrl} 
+								passLoginStatus = {this.getLoginStatusPass}/>	
 						} />	
 					</Switch>
 				</div>

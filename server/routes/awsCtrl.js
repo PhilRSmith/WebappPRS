@@ -7,7 +7,7 @@ var jwt = require("jsonwebtoken");
 var SecretPayload=process.env.SecretPayload
 var comicUploadSchema = require("../Schemas/comicUploadSchema");
 
-var mongooseSetup = async () => {
+/*var mongooseSetup = async () => {
   var adminLoginCredentials=process.env.DBAccess
   try {
     await mongoose.connect(adminLoginCredentials,  {
@@ -19,7 +19,7 @@ var mongooseSetup = async () => {
     console.log(e);
     throw e;
   }
-};
+};*/
 
 router.post('/', async function(req, res) {
   const S3_BUCKET = process.env.bucket
@@ -27,10 +27,10 @@ router.post('/', async function(req, res) {
  
   var token = req.cookies.token
  
-  mongooseSetup()
+  //mongooseSetup()
   
   if (!token) {
-    mongoose.disconnect()
+    //mongoose.disconnect()
     return res.json('Authentication Error')
   }
     try {
@@ -67,7 +67,7 @@ router.post('/', async function(req, res) {
             s3.getSignedUrl('putObject', s3Params, (err, data) => {
               if (err) {
                 console.log(err);
-                mongoose.disconnect()
+                //mongoose.disconnect()
                 res.json({ success: false, error: err })
               }
               // Data payload of what we are sending back, the url of the signedRequest and a URL where we can access the content after its saved. 
@@ -89,20 +89,20 @@ router.post('/', async function(req, res) {
             await comicpage.save();
           }
           else{
-            mongoose.disconnect()
+            //mongoose.disconnect()
             console.log('INSUFFICIENT INFO')
             res.json('INSUFFICIENT INFO')
           }
           }
         else{
-          mongoose.disconnect()
+          //mongoose.disconnect()
           console.log('UNAUTHORIZED ACCESS')
           res.json('UNAUTHORIZED ACCESS')
         }
-        mongoose.connection.close()
+        //mongoose.connection.close()
     } catch (e) {
       console.error(e);
-      mongoose.disconnect()
+      //mongoose.disconnect()
       res.json('Authentication Error');
     }
 
