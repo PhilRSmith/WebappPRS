@@ -10,6 +10,7 @@ Current Progress:
 - Established browsing links to each page in the DB from the frontend (that is to say potential comics should now be individually viewable)
 - Added in user login/token system for regular users and admins
 - Added comic upload feature for administrators
+- Deployed test version to ec2 at: http://ec2-3-21-56-228.us-east-2.compute.amazonaws.com/
 
 Next Steps:
 - Add protected routes
