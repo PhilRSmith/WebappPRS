@@ -7,20 +7,6 @@ router.get('/', (req, res, next) => {
   });
 
 
-/* Load user profile info */
-router.get('/profile', (req, res) => {
-  const adminLoginCredentials=process.env.DBAccess
-  MongoClient.connect(adminLoginCredentials, {
-                      useNewUrlParser: true,
-                      useUnifiedTopology : true 
-                      } , function (err, client) {
-                      if (err) throw err
-     res.json({ express: 'express backend linked to react' })
-     client.close()
-                      })
-  
-  });
-
 /* load all issues of comics (front page of each) */
 router.get('/browse', (req, res) => {
   const adminLoginCredentials=process.env.DBAccess

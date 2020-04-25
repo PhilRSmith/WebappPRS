@@ -3,6 +3,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 class Profile extends React.Component {
+	_isMounted = false;
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -12,18 +13,33 @@ class Profile extends React.Component {
 		profDesc: "Is he a cat? Is he a car? Was he human before? We may never know..."
 		}
 	};
+	
 	profClickHandler = () =>  {
-		var url = `${this.props.baseUrl}/profile`
-	 fetch(url)
-	 .then((result) => result.json())
-	 .then(result => {
-			this.setState({ servOutput : result})
+		var url = `${this.props.baseUrl}/users/profile`
+		fetch(url , {
+			method: 'GET',
+			credentials: 'include',
+		})
+		.then((result) => result.json())
+		.then(result => {
+			if(this._isMounted){
+				this.setState({ profName : result[0]})
+				this.setState({ profImage : result[1]})
+				this.setState({ profDesc : result[2]})
+			}
 		});
-	  }
+	}
+
 	 
+
+	  
 	  componentDidMount(){
+		this._isMounted = true;
 		this.profClickHandler()
 	  }
+	  componentWillUnmount() {
+		this._isMounted = false;
+	  };
   render() {
     return (
 			<React.Fragment>

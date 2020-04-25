@@ -4,6 +4,7 @@ import 'bootstrap/dist/js/bootstrap.bundle'
 import Profile from './Profile'
 
 class ProfMain extends React.Component {
+	_isMounted = false;
 	constructor(props){
 		super(props);
 		this.state = { 
@@ -12,7 +13,13 @@ class ProfMain extends React.Component {
 		}
 	};
 	
-	
+	componentDidMount(){
+		this._isMounted = true
+	  }
+
+	componentWillUnmount() {
+	this._isMounted = false;
+	};
 	render(){
 		
 	return (
