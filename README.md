@@ -21,6 +21,9 @@ Next Steps:
 
 
 Down The Line:
+- Add email verification system
+- Add Password Recovery System
+- Add comment system for users to give feedback/thoughts on comics
 - Add a way to logout a user without closing browser
 - Add protected routes (security currently handled by encrypted tokens/cookies)
 - Add User Favorites list for comics
