@@ -11,10 +11,17 @@ Current Progress:
 - Added in user login/token system for regular users and admins
 - Added comic upload feature for administrators
 - Deployed test version to ec2 at: http://ec2-3-21-56-228.us-east-2.compute.amazonaws.com/
+- Added Register Functionality for guests
+- Added small profile functionality to users
 
 Next Steps:
-- Add protected routes
 - Add about authors page
-- Add small settings/profile functionality to users
-- Add Register Functionality for guests
-- Add buttons to view previous or next comic "Issues"
+- Add functional buttons to view previous or next comic "Issues"
+- Fix issue where Dropdown menu requires 2 clicks to open on initial refresh/render
+
+
+Down The Line:
+- Add a way to logout a user without closing browser
+- Add protected routes
+- Add User Favorites list for comics
+- Clean up website appearance, replace assets with custom art/designs
