@@ -22,6 +22,9 @@ Next Steps:
 
 Down The Line:
 - Add a way to logout a user without closing browser
-- Add protected routes
+- Add protected routes (security currently handled by encrypted tokens/cookies)
 - Add User Favorites list for comics
 - Clean up website appearance, replace assets with custom art/designs
+
+
+
