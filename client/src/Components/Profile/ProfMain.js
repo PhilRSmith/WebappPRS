@@ -75,7 +75,8 @@ class ProfMain extends React.Component {
             .then((result) => {
                 console.log('result');
                 if (result) {
-                    console.log(Object.entries(result));
+					console.log(Object.entries(result));
+					window.location.reload();
                 }
                 
 				
@@ -86,7 +87,6 @@ class ProfMain extends React.Component {
                     console.log(Object.entries(error))
                 }
 			})
-			window.location.reload();
     }; 
 	render(){
 	
