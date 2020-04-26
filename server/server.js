@@ -12,7 +12,7 @@ var mongoose = require("mongoose");
 require('dotenv').config();
 
 //var SecretPayload=process.env.SecretPayload
-//var portDev = process.env.port || 9000
+var portDev = process.env.port || 9000
 //var portPub = process.env.port || 8080
 
 var allowedOrigins = ['http://localhost:9000',

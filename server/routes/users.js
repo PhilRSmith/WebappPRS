@@ -23,6 +23,68 @@ var auth = require("./authMiddleware/authorization")
   }
 };*/
 
+/* Load user profile info */
+router.get('/profile', async (req, res) => {
+  var token = req.cookies.token
+  if(!token) return res.json('no user token')
+  try{
+    console.log('grabbing profile')
+    const decoded = jwt.verify(token, `${SecretPayload}`);
+    const { email } = decoded.user
+    let user = await User.findOne({
+      email
+    });
+
+    var profileDetails = []
+    for(var i = 0; i<3; i++){
+      if(i==0){
+        profileDetails.push(user.username)
+      }
+      if(i==1){
+        profileDetails.push(user.profile_img)
+      }
+      if(i==2){
+        profileDetails.push(user.profile_desc)
+      }
+    }
+    res.json(profileDetails)
+    res.status(200)
+
+  } catch (e) {
+    console.error(e);
+    res.status(400)
+  }
+  
+  });
+
+router.post("/editProfile" , async (req, res) => {
+  var token = req.cookies.token
+  const { username, image, desc } = req.body;
+  if(!token) return res.json('no user token')
+  try{
+    console.log('grabbing profile')
+    const decoded = jwt.verify(token, `${SecretPayload}`);
+    const { email } = decoded.user
+    let user = await User.findOne({
+      email
+    });
+
+    var query = {'email' : user.email}
+    user.profile_img = image
+    user.username = username
+    user.profile_desc = desc
+
+    await User.findOneAndUpdate(query, user, {upsert: false}, function(err, doc) {
+      if (err) return res.send(500, {error:err});
+      return res.send('Successful Edit')
+    })
+  } catch (e) {
+    console.error(e);
+    //mongoose.disconnect()
+    res.json('Failed Edit'); 
+  }
+})
+
 router.get("/userRole", async (req, res) => {
   console.log(req.cookies.token)
   var token = req.cookies.token
@@ -31,7 +93,7 @@ router.get("/userRole", async (req, res) => {
   if (!token) return res.json('guest')
   try {
     const decoded = jwt.verify(token, `${SecretPayload}`);
-    var userRole = decoded.user.role;
+    const userRole = decoded.user.role;
     console.log('userRole: ' + userRole)
     //mongoose.disconnect()
     res.json(userRole)
@@ -50,7 +112,7 @@ router.post('/login', async (req, res) => {
   const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      console.log('this bitch empty, YEET')
+      console.log('this &17$@ empty, YEET')
       //mongoose.disconnect()
       return res.status(400).json({
         errors: errors.array()
@@ -82,7 +144,8 @@ router.post('/login', async (req, res) => {
       const claims = {
         user: {
               role: user.userType,
-              id: user.id
+              id: user.id,
+              email: user.email
           }
       };
 
@@ -160,7 +223,8 @@ router.post('/register',  async (req, res) => {
           const claims = {
               user: {
                   role: user.userType,
-                  id: user.id
+                  id: user.id,
+                  email: user.email
               }
           };
 

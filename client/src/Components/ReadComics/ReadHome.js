@@ -57,8 +57,6 @@ class ReadHome extends React.Component {
 					this.setState({curIssue: currentIssue})
 				}
 			}
-
-
       }
       
     clickReload = () => {
