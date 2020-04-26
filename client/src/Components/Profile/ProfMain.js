@@ -99,10 +99,12 @@ class ProfMain extends React.Component {
 							  passProfileInfo = {this.fillProfileInfo}/>
 					<div className='container-fluid'>
 						<div className = 'text-center'>
-							<button className="btn btn-secondary" type="button" onClick={this.editClick}>Edit</button>
+							<button className="btn btn-secondary" type="button" width = "100%" onClick={this.editClick}>Edit</button>
 						</div>
 					</div>
+
 			</div>
+			
 		</React.Fragment>
 	  )
 	
