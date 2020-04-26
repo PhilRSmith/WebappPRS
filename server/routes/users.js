@@ -59,6 +59,7 @@ router.get('/profile', async (req, res) => {
 
 router.post("/editProfile" , async (req, res) => {
   var token = req.cookies.token
+  const { username, image, desc } = req.body;
   if(!token) return res.json('no user token')
   try{
     console.log('grabbing profile')
@@ -67,10 +68,20 @@ router.post("/editProfile" , async (req, res) => {
     let user = await User.findOne({
       email
     });
+
+    var query = {'email' : user.email}
+    user.profile_img = image
+    user.username = username
+    user.profile_desc = desc
+
+    await User.findOneAndUpdate(query, user, {upsert: false}, function(err, doc) {
+      if (err) return res.send(500, {error:err});
+      return res.send('Successful Edit')
+    })
   } catch (e) {
     console.error(e);
     //mongoose.disconnect()
-    res.json('failed edit'); 
+    res.json('Failed Edit'); 
   }
 })
 

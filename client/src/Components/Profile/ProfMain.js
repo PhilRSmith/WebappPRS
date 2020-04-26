@@ -85,7 +85,8 @@ class ProfMain extends React.Component {
                 if (error) {
                     console.log(Object.entries(error))
                 }
-            })
+			})
+			window.location.reload();
     }; 
 	render(){
 	
@@ -132,7 +133,7 @@ class ProfMain extends React.Component {
 								<div className="form-group"  >
 								<label htmlFor="comicpage-page">Edit your bio</label>
 								<input type="desc" className="form-control" id="desc" placeholder={this.state.fields.desc} name = "desc"
-								maxLength={300} required={true}/>
+								maxLength={300} required={false}/>
 								</div>
 								<button type= 'submit' className="btn btn-primary" >Confirm</button>
 							</form>
