@@ -26,7 +26,7 @@ var auth = require("./authMiddleware/authorization")
 /* Load user profile info */
 router.get('/profile', async (req, res) => {
   var token = req.cookies.token
-  if(!token) return res.json('guest')
+  if(!token) return res.json('no user token')
   try{
     console.log('grabbing profile')
     const decoded = jwt.verify(token, `${SecretPayload}`);
@@ -56,6 +56,23 @@ router.get('/profile', async (req, res) => {
   }
   
   });
+
+router.post("/editProfile" , async (req, res) => {
+  var token = req.cookies.token
+  if(!token) return res.json('no user token')
+  try{
+    console.log('grabbing profile')
+    const decoded = jwt.verify(token, `${SecretPayload}`);
+    const { email } = decoded.user
+    let user = await User.findOne({
+      email
+    });
+  } catch (e) {
+    console.error(e);
+    //mongoose.disconnect()
+    res.json('failed edit'); 
+  }
+})
 
 router.get("/userRole", async (req, res) => {
   console.log(req.cookies.token)
