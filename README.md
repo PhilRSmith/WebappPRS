@@ -23,6 +23,7 @@ Next Steps:
 Down The Line:
 - Add email verification system
 - Add Password Recovery System
+- Possibly scrap current user login/registration system in favor of OAuth2
 - Add comment system for users to give feedback/thoughts on comics
 - Add a way to logout a user without closing browser
 - Add protected routes (security currently handled by encrypted tokens/cookies)
