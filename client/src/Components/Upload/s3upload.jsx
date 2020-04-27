@@ -38,7 +38,7 @@ export default class S3Upload extends Component {
     console.log("Preparing the upload");
     
     axios.defaults.withCredentials = true;
-    axios.post("http://localhost:9000/sign_s3",{
+    axios.post(`${this.props.baseUrl}/sign_s3`,{
       title: this.state.fields.title , 
       issue: this.state.fields.issue ,
       page: this.state.fields.page ,

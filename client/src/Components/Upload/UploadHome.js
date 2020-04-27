@@ -26,7 +26,11 @@ class Upload extends React.Component {
 	return (
 		<React.Fragment>
 			<div className = 'container-flex' >
-				<S3Upload />
+				<S3Upload 
+					userRole = {this.props.userRole}
+					loginStatus= {this.props.loginStatus}  
+					baseUrl = {this.props.baseUrl}
+				/>
 			</div>
             
 		</React.Fragment>
