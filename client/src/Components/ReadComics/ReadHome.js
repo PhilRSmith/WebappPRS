@@ -2,6 +2,7 @@ import React from 'react'
 import 'bootstrap/dist/js/bootstrap.bundle'
 import Pages from './Pages'
 import {Link} from 'react-router-dom';	
+import history from '../util/history';
 
 
 class ReadHome extends React.Component {
@@ -64,7 +65,29 @@ class ReadHome extends React.Component {
 		this.setState({pathName: curPath})
 		this.browseLoadHandler()
 		this.pageLoadHandler()
-    }
+	}
+	
+	nextPage = () => {
+		if(this.state.curIssue<this.state.issueMax){
+			history.push(`/Read/${this.state.curIssue + 1}`);
+			window.location.reload();
+		}
+		else{
+			history.push(`/Read/${this.state.curIssue}`);
+       		window.location.reload();
+		}
+	}
+
+	prevPage = () => {
+		if(this.state.curIssue>this.state.issueMin){
+			history.push(`/Read/${this.state.curIssue - 1}`);
+			window.location.reload();
+		}
+		else{
+			history.push(`/Read/${this.state.curIssue}`);
+       		window.location.reload();
+		}
+	}
 	 
 	  componentDidMount(){
 		this._isMounted = true;
@@ -130,14 +153,16 @@ class ReadHome extends React.Component {
 					<Pages passDataToDynamicCards = {this.state.pageData}/>
 					<div className = 'container-fluid' style = {buttonBar}>
 						<div>
-							<button type="button" className="btn btn-secondary">Previous</button>
+							<button type="button" className="btn btn-secondary" onClick = {this.prevPage}>
+								<div className='text-center'>Previous </div>
+							</button>
 						</div>
 
 						
 
 						<div>
 							<div className = 'container' style = {nextButton}></div>
-								<button type="button" className="btn btn-secondary" style = {nextButton}>
+								<button type="button" className="btn btn-secondary" style = {nextButton} onClick={this.nextPage}>
 									<div className='text-center'  > Next </div>
 								</button>
 							</div>

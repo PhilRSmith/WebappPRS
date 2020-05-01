@@ -67,7 +67,7 @@ class App extends React.Component {
 	
 	render(){
 		var NavStyle = {
-			
+			height : "100%"
 		};
 	return(
 

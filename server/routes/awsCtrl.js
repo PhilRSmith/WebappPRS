@@ -5,6 +5,7 @@ const { check, validationResult} = require("express-validator");
 var jwt = require("jsonwebtoken");
 var SecretPayload=process.env.SecretPayload
 var comicUploadSchema = require("../Schemas/comicUploadSchema");
+var userSchema = require("../Schemas/userSchema")
 
 /*var mongooseSetup = async () => {
   var adminLoginCredentials=process.env.DBAccess
@@ -112,19 +113,19 @@ Plan to have this remove the old photo from S3, and update user info in db to ne
 alternatively, may simply have user put in their own url for the img*/
 router.post('/profile_img', async function(req, res) {
   const S3_BUCKET = process.env.userbucket
-  
- 
   var token = req.cookies.token
- 
-  //mongooseSetup()
-  
   if (!token) {
-    //mongoose.disconnect()
+    
     return res.json('Authentication Error')
   }
     try {
       const decoded = jwt.verify(token, `${SecretPayload}`);
-      var role = decoded.user.role;
+      const { email, role } = decoded.user
+      let user = await User.findOne({
+      email
+      });
+
+      var query = {'email' : user.email}
       
       if((role == 'user') || (role =='admin')){
         console.log('userRole: ' + role)
