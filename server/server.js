@@ -27,7 +27,7 @@ var allowedOrigins = ['http://localhost:9000',
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.listen(portDev, () => console.log(`Listening on port ${portDev}`));
+//app.listen(portDev, () => console.log(`Listening on port ${portDev}`));
 app.use(logger('dev'));
 app.use(cors({
     credentials: true ,

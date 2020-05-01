@@ -19,8 +19,8 @@ class App extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = { 
-			//homeUrl: 'http://ec2-3-21-56-228.us-east-2.compute.amazonaws.com:9000',
-			homeUrl: 'http://localhost:9000',
+			homeUrl: 'http://ec2-3-21-56-228.us-east-2.compute.amazonaws.com:9000',
+			//homeUrl: 'http://localhost:9000',
 			loginStatus: false,
 			userRole: 'guest'
 		}
@@ -82,7 +82,7 @@ class App extends React.Component {
 			<div/>
 				<div className = 'container' style = {
 					{
-						backgroundColor: 'crimson',
+						backgroundColor: '#add2e7',
 						width: '100%',
 						height: '100%'
 					}
