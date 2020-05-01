@@ -1,6 +1,6 @@
 Web-comic host site
 MERN STACK
-
+Currently Deployed Version: http://ec2-3-21-56-228.us-east-2.compute.amazonaws.com/
 
 Current Progress:
 - React Client built
