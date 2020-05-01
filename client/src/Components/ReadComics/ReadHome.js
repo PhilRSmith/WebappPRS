@@ -2,6 +2,7 @@ import React from 'react'
 import 'bootstrap/dist/js/bootstrap.bundle'
 import Pages from './Pages'
 import {Link} from 'react-router-dom';	
+import { Grid, Row, Col } from 'react-flexbox-grid';
 import history from '../util/history';
 
 
@@ -106,10 +107,6 @@ class ReadHome extends React.Component {
 			
 		}
 
-		var buttonBar = {
-			display: 'flex'
-		}
-		
 		var nextButton = {
 			justifyContent: "flex-end",
 			alignItems: "flex-end",
@@ -128,15 +125,23 @@ class ReadHome extends React.Component {
         var DropdownButtonStyle = {
             width: '100%',
 			
-        };
+		};
+		
 	return (
 		<React.Fragment>
 			<div className = 'container' >
 
-                <div className = 'container-flex' style={pageStyle}>
+				<div className = 'container-flex' style={pageStyle}>
+				<Row>
+					<Col xs={2} sm={2} md={1} lg={1}>
+						<button type="button" className="btn btn-secondary" onClick = {this.prevPage}>
+							<div className='text-center'>Prev</div>
+						</button>
+					</Col>
+					<Col xs={8} sm={8} md={10} lg={10}>
                 	<div className="dropdown" id = "DropdownList">
-                		<button className="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" style={DropdownButtonStyle} >Comic List
-							<span className="caret"></span>
+						<button className="btn btn-secondary dropdown-toggle" type="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={DropdownButtonStyle}>
+							Comic List
 						</button>
                 		<ul className="dropdown-menu" style = {DropdownListStyle}>
 							{this.state.cardData.map(elem => (
@@ -147,35 +152,35 @@ class ReadHome extends React.Component {
 								</li>              
 							) ) } 	
                 		</ul>
-            		</div>
+					</div>
+					</Col>
+					<Col xs={1} sm={1} md={1} lg={1}>
+						<button type="button" className="btn btn-secondary" onClick = {this.nextPage}>
+							<div className='text-center'>Next</div>
+						</button>
+					</Col>
+				</Row>
 				</div>
 				<div className = 'container-flex'>
 					<Pages passDataToDynamicCards = {this.state.pageData}/>
-					<div className = 'container-fluid' style = {buttonBar}>
-						<div>
+					<div className = 'container-fluid'>	
+					<Row>
+						<Col xs={6} sm={6} md={6} lg={6}>
 							<button type="button" className="btn btn-secondary" onClick = {this.prevPage}>
-								<div className='text-center'>Previous </div>
+								<div className='text-center'>Prev</div>
 							</button>
-						</div>
-
-						
-
-						<div>
-							<div className = 'container' style = {nextButton}></div>
-								<button type="button" className="btn btn-secondary" style = {nextButton} onClick={this.nextPage}>
-									<div className='text-center'  > Next </div>
-								</button>
-							</div>
+						</Col>
+						<Col xsOffset = {4} xs={1} smOffset = {4} sm={1} mdOffset={5} md={1} lgOffset={5} lg={1}>	
+							<button type="button" className="btn btn-secondary"  onClick={this.nextPage}>
+								<div className='text-center'  > Next </div>
+							</button>
+						</Col>	
+					</Row>
 						</div>
 					</div>
-				</div>
-				
-
-            
+				</div>         
 		</React.Fragment>
 	)
-	}
-	
+	}	
 };
-
 export default ReadHome;

@@ -41,7 +41,7 @@ import {Link} from 'react-router-dom';
 							alignItems="flex-start"	
 						>
 							{this.props.passDataToDynamicCards.map(elem => (
-								<Grid item xs={9} sm={6} md={3} key={this.props.passDataToDynamicCards.indexOf(elem)}>
+								<Grid item xs={8} sm={6} md={3} lg={3} key={this.props.passDataToDynamicCards.indexOf(elem)}>
 									<Card>
 										<CardHeader
 											title = {<Link to={`/Read/${elem.issue}`}> {`${elem.title}`} </Link>}
@@ -49,7 +49,7 @@ import {Link} from 'react-router-dom';
 										<CardContent>
 											<Typography  component={'span'}>
                                                 <div className="container" style={this.state.imagedesc}>
-												<img src= {elem.img_url} width = "160px" height = "240px" alt = 'empty' />
+												<img src= {elem.img_url} width = "100%" height = "240px" alt = 'empty' />
 												</div>
 											</Typography>
 										</CardContent>
