@@ -19,8 +19,8 @@ class App extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = { 
-			homeUrl: 'http://ec2-3-21-56-228.us-east-2.compute.amazonaws.com:9000',
-			//homeUrl: 'http://localhost:9000',
+			//homeUrl: 'http://ec2-3-21-56-228.us-east-2.compute.amazonaws.com:9000',
+			homeUrl: 'http://localhost:9000',
 			loginStatus: false,
 			userRole: 'guest'
 		}
@@ -73,26 +73,27 @@ class App extends React.Component {
 
 		<CookiesProvider>
 			<Router history = {history}>
-				<div className = 'container' style = {
-					{
-						backgroundColor: 'crimson',
-						width: '90%',
-						height: '100%'
-					}
-				}>
-					<div className= 'container' style = {NavStyle}>
+			<div className= 'container' style = {NavStyle}>
 							<NavBar 
 								loginStatus= {this.state.loginStatus}  
 								baseUrl = {this.state.homeUrl}	
 								userRole = {this.state.userRole}
 							/>
+			<div/>
+				<div className = 'container' style = {
+					{
+						backgroundColor: 'crimson',
+						width: '100%',
+						height: '100%'
+					}
+				}>
 							<Login 
 								baseUrl = {this.state.homeUrl}
 								loginStatus= {this.state.loginStatus}
 								userRole = {this.state.userRole}
 								passLoginStatus = {this.getLoginStatusPass}
 							/>
-					</div>
+					
 					<Switch>
 						<Route path="/" exact component={
 							() => 
@@ -146,6 +147,7 @@ class App extends React.Component {
 								passLoginStatus = {this.getLoginStatusPass}/>	
 						} />	
 					</Switch>
+				</div>
 				</div>
 			</Router>
 		</CookiesProvider>
