@@ -2,6 +2,7 @@ import React from 'react'
 import 'bootstrap/dist/js/bootstrap.bundle'
 import ComicsListCards from './ComicsListCards'
 import ComicsListDropdown from './ComicsListDropdown'
+import history from '../util/history'; 
 
 
 class ComicsBase extends React.Component {
@@ -10,7 +11,9 @@ class ComicsBase extends React.Component {
 		super(props);
 		this.state = { 
 			tempData:[],
-			cardData: []   
+			cardData: [],
+			issueMax: 10,
+			issueMin: 1,
 		}
 	};
 	
@@ -20,7 +23,12 @@ class ComicsBase extends React.Component {
 	 fetch(url)
 	 	.then((result) => result.json())
 	 	.then(result => {
-			if (this._isMounted) {
+			var max = parseInt(result[result.length -1]['issue'])
+			var min = parseInt(result[0]['issue'])
+			if(this._isMounted){
+			this.setState({ cardData : result})
+			this.setState({issueMax: max})
+			this.setState({issueMin: min})
 			this.setState({ cardData : result})
 			}
 		});
@@ -29,8 +37,15 @@ class ComicsBase extends React.Component {
 	  componentDidMount(){
 		this._isMounted = true;
 		this.browseLoadHandler()
-		
 	  };
+
+	  goToRandom = () => {
+		var max = parseInt(this.state.cardData[this.state.cardData.length -1]['issue'])
+		var min = parseInt(this.state.cardData[0]['issue'])
+		var randopick = Math.floor(Math.random() * (max - min + 1)) + min;
+		history.push(`/Read/${randopick}`);
+        window.location.reload();
+	  }
 	  
 	  componentWillUnmount() {
 		this._isMounted = false;
@@ -45,7 +60,11 @@ class ComicsBase extends React.Component {
 		<React.Fragment>
 			<div className = 'container-flex' >
 
-				<div className = 'container' style={pageStyle}><ComicsListDropdown passDataToDynamicCards = {this.state.cardData}/>
+				<div className = 'container' style={pageStyle}>
+				<ComicsListDropdown passDataToDynamicCards = {this.state.cardData}/>
+				<div className = 'text-center'>
+					<button type="button" className="btn btn-secondary" onClick={this.goToRandom}> or Random Selection!</button>
+				</div>
 				<ComicsListCards passDataToDynamicCards = {this.state.cardData}/></div>
 			</div>
             

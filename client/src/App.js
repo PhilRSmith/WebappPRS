@@ -67,32 +67,33 @@ class App extends React.Component {
 	
 	render(){
 		var NavStyle = {
-			
+			height : "100%"
 		};
 	return(
 
 		<CookiesProvider>
 			<Router history = {history}>
-				<div className = 'container' style = {
-					{
-						backgroundColor: 'crimson',
-						width: '90%',
-						height: '100%'
-					}
-				}>
-					<div className= 'container' style = {NavStyle}>
+			<div className= 'container' style = {NavStyle}>
 							<NavBar 
 								loginStatus= {this.state.loginStatus}  
 								baseUrl = {this.state.homeUrl}	
 								userRole = {this.state.userRole}
 							/>
+			<div/>
+				<div className = 'container' style = {
+					{
+						backgroundColor: '#add2e7',
+						width: '100%',
+						height: '100%'
+					}
+				}>
 							<Login 
 								baseUrl = {this.state.homeUrl}
 								loginStatus= {this.state.loginStatus}
 								userRole = {this.state.userRole}
 								passLoginStatus = {this.getLoginStatusPass}
 							/>
-					</div>
+					
 					<Switch>
 						<Route path="/" exact component={
 							() => 
@@ -146,6 +147,7 @@ class App extends React.Component {
 								passLoginStatus = {this.getLoginStatusPass}/>	
 						} />	
 					</Switch>
+				</div>
 				</div>
 			</Router>
 		</CookiesProvider>
