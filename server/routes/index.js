@@ -23,12 +23,13 @@ router.get('/browse', (req, res) => {
      if (err) throw err
       res.json(items)
       client.close()
-      //console.log('closed connection')
+      
     })
     
   })
   });
 
+  //Loads the latest comic issue
   router.get('/homecards', (req, res) => {
     const adminLoginCredentials=process.env.DBAccess
     MongoClient.connect(adminLoginCredentials, {
@@ -40,11 +41,10 @@ router.get('/browse', (req, res) => {
       var db = client.db('418Admin')
       var dbPages = db.collection('comicpages')
   
-      dbPages.find().sort({issue: -1}).limit(1).toArray((err, items)=>{
+      dbPages.find({page: 1}).sort({issue: -1}).limit(1).toArray((err, items)=>{
        if (err) throw err
         res.json(items)
         client.close()
-        //console.log('closed connection')
       })
       
     })
@@ -65,11 +65,11 @@ router.get('/Read/:issue', (req,res)=>{
       var db = client.db('418Admin')
       var dbPages = db.collection('comicpages')
   
-      dbPages.find({issue: inputIssue}).toArray((err, items)=>{
+      dbPages.find({issue: inputIssue}).sort({page: 1}).toArray((err, items)=>{
        if (err) throw err
         res.json(items)
         client.close()
-        //console.log('closed connection')
+        
       })
   });
 })
