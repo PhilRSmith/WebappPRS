@@ -11,7 +11,6 @@ import ReadHome from './Components/ReadComics/ReadHome'
 import RegisterPage from './Components/Register/RegisterPage'
 import About from './Components/About/About'
 import Upload from './Components/Upload/UploadHome'
-import {userRole} from './Components/Authentication/Authenticate'
 import { CookiesProvider } from 'react-cookie';
 
 class App extends React.Component {

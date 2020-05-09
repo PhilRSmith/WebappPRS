@@ -1,7 +1,7 @@
 import React from 'react'
 import 'bootstrap/dist/js/bootstrap.bundle'
-import { Grid, Row, Col } from 'react-flexbox-grid';
-import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton } from 'react-twitter-embed';
+import { Row, Col } from 'react-flexbox-grid';
+import { TwitterTimelineEmbed } from 'react-twitter-embed';
 //import { Router, Switch, Route, Link } from 'react-router-dom'
 import DynamicCards from './DynamicCards'
 import unirest from 'unirest'

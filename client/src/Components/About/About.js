@@ -1,6 +1,5 @@
 import React from 'react'
 import 'bootstrap/dist/js/bootstrap.bundle'
-import { Grid, Row, Col } from 'react-flexbox-grid';
 import ReactPlayer from 'react-player'
 //import { Router, Switch, Route, Link } from 'react-router-dom'
 	

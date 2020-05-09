@@ -2,7 +2,7 @@ import React from 'react'
 import 'bootstrap/dist/js/bootstrap.bundle'
 import Pages from './Pages'
 import {Link} from 'react-router-dom';	
-import { Grid, Row, Col } from 'react-flexbox-grid';
+import { Row, Col } from 'react-flexbox-grid';
 import history from '../util/history';
 
 
@@ -105,19 +105,7 @@ class ReadHome extends React.Component {
 
 		var pageStyle = {
 			
-		}
-
-		var nextButton = {
-			justifyContent: "flex-end",
-			alignItems: "flex-end",
-			width : '100%'
-		}
-
-		var prev = {
-			justifyContent: "flex-start",
-			alignItems: "flex-start"	
-		}
-        
+		}     
         var DropdownListStyle = {
             width: '100%',
 			overflowY : 'scroll'
