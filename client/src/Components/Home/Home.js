@@ -1,10 +1,9 @@
 import React from 'react'
 import 'bootstrap/dist/js/bootstrap.bundle'
-import { Row, Col } from 'react-flexbox-grid';
-import { TwitterTimelineEmbed } from 'react-twitter-embed';
+import { Grid, Row, Col } from 'react-flexbox-grid';
+import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton } from 'react-twitter-embed';
 //import { Router, Switch, Route, Link } from 'react-router-dom'
 import DynamicCards from './DynamicCards'
-import unirest from 'unirest'
 
 class Home extends React.Component {
 	_isMounted = false;
@@ -31,6 +30,8 @@ class Home extends React.Component {
 	
 
 	covidInfoStates = () => {
+		var unirest = require("unirest");
+
 		var req = unirest("GET", "https://covid-19-data.p.rapidapi.com/country");
 
 		req.query({
@@ -58,6 +59,8 @@ class Home extends React.Component {
 	}
 
 	covidInfoJapan = () => {
+		var unirest = require("unirest");
+
 		var req = unirest("GET", "https://covid-19-data.p.rapidapi.com/country");
 
 		req.query({
@@ -86,6 +89,10 @@ class Home extends React.Component {
 		
 	}
 	
+
+
+
+
 	homeLoadHandler = () =>  {
 		var url = `${this.props.baseUrl}/homecards`
 	 fetch(url)
@@ -107,10 +114,6 @@ class Home extends React.Component {
 	  };
 	
 	render(){
-		var homeCards = {
-            width: '100%',
-			overflowY : 'scroll'
-		};
 		var headerStyle = {
 			backgroundColor : 'rgb(59, 205, 241)'
 		}
