@@ -173,6 +173,7 @@ class Home extends React.Component {
 							<h5>{`Recovered: ${this.state.covidJapan.recovered}`}</h5>
 						</Col>
 						</Row>
+						<div className='text-center'><h2>STAY SAFE!</h2></div>
 						
 					</div>			
 					</Col>
