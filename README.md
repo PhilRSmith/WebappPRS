@@ -4,7 +4,7 @@ Currently Deployed Version: http://ec2-3-21-56-228.us-east-2.compute.amazonaws.c
 
 #Brief Introduction: This is the code for a WIP website that is planned to eventually host a web comic potentially created by my friends. 
 
-So far the base has been created such that new entries can be uploaded, browsed through and viewed in a manner similar to other sites. With this said, core functionality is up and running. The next intended step is to add in a more universal login system such as OAuth2 and scrap the old placeholder user account system. By implementing this, it will become easier to create comment, favorite,e-mail notification systems, among other features for potential users.
+So far the base has been created such that new entries can be uploaded, browsed through and viewed in a manner similar to other sites. With this said, core functionality is up and running. The next intended step is to add in a more universal login system such as OAuth2 and scrap the old placeholder user account system. By implementing this, it will become easier to create comment, favorite, and e-mail notification systems, among other features for potential users.
 
 The code is built using Node.JS in a MERN stack framework, and the Database used is MongoDB via Atlas, deployed to an EC2 T2.Micro instance from AWS.
 
